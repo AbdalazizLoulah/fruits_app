@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/feature/welcom/view/widget/welcome_screen_body.dart';
+import 'package:fruits_app/feature/welcome/view/widget/welcome_screen_body.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -7,6 +7,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: WelcomeScreenBody(),
     );
   }

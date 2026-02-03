@@ -22,7 +22,6 @@ class SkipBottom extends StatelessWidget {
                   fontSize: h * 0.025,
                   color: ColorApp.gray,
                   title: "Skip",
-                  family: "Poppins",
                 ),
                 Divider(),
               ],

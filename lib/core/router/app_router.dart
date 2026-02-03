@@ -1,6 +1,10 @@
-import 'package:fruits_app/feature/on_board.dart/view/on_boarde_screen.dart';
+import 'package:fruits_app/feature/Auth/forgetPassword/view/forget_password.dart';
+import 'package:fruits_app/feature/Auth/logIn/view/log_in_screen.dart';
+import 'package:fruits_app/feature/Auth/otp/view/otp_screen.dart';
+import 'package:fruits_app/feature/Auth/signUp/view/sign_in_screen.dart';
+import 'package:fruits_app/feature/on_board.dart/view/on_board_screen.dart';
 import 'package:fruits_app/feature/splash/view/splash_screen.dart';
-import 'package:fruits_app/feature/welcom/view/welcome_screen.dart';
+import 'package:fruits_app/feature/welcome/view/welcome_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -9,6 +13,16 @@ class AppRouter {
       GoRoute(path: '/', builder: (context, state) => SplashScreen()),
       GoRoute(path: '/onboard', builder: (context, state) => OnBoardScreen()),
       GoRoute(path: '/welcome', builder: (context, state) => WelcomeScreen()),
+      GoRoute(path: '/logIn', builder: (context, state) => LogInScreen()),
+      GoRoute(
+        path: '/forgetPassword',
+        builder: (context, state) => ForgetPassword(),
+      ),
+      GoRoute(
+        path: '/signUp',
+        builder: (context, state) => SignInScreen(),
+      ),
+      GoRoute(path: '/otp', builder: (context, state) => OtpScreen()),
     ],
   );
 }

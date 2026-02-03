@@ -5,17 +5,18 @@ class CustomText extends StatelessWidget {
     super.key,
     required this.fontSize,
     required this.color,
-    required this.title, required this.family,
+    required this.title,
+    this.fontFamily=true,
   });
   final double fontSize;
   final Color color;
   final String title;
-  final String family;
+  final bool fontFamily;
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(color: color, fontSize: fontSize, fontFamily: family),
+      style: TextStyle(color: color, fontSize: fontSize, fontFamily:fontFamily? "Bold":"Regular"),
     );
   }
 }

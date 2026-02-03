@@ -27,6 +27,7 @@ class _SplashScreenBodyState extends State<SplashScreenBody> {
       child: Stack(
         children: [
           Image.asset(
+            width: w,
             "assets/image/background_splash_screen.png",
             fit: BoxFit.fill,
           ),
