@@ -14,11 +14,11 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = [
-      "assets/image/restorant.png",
-      "assets/image/cafe.png",
-      "assets/image/clinec.png",
-      "assets/image/farm.png",
+    List<Map<String, dynamic>> items = [
+      {"image": "assets/image/restorant.png","title":""},
+      {"image": "assets/image/cafe.png", "title": ""},
+      {"image": "assets/image/clinec.png", "title": ""},
+      {"image": "assets/image/farm.png", "title": ""},
     ];
     PageController _pageController = PageController();
     var h = MediaQuery.of(context).size.height;
@@ -30,6 +30,7 @@ class HomeBody extends StatelessWidget {
           children: [
             SizedBox(height: h * 0.05),
             CustomAppBar(
+              icon1: Icons.search,icon2: Icons.tune,
               title: "Fruit Market",
               onTap: () {
                 showDialog(
@@ -44,7 +45,6 @@ class HomeBody extends StatelessWidget {
             CustomSlider(h: h, pageController: _pageController),
             SizedBox(height: h * 0.02),
             CustomListCategory(h: h, items: items),
-            SizedBox(height: h * 0.02),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

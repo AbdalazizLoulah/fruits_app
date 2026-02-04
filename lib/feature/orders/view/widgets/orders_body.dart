@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
-import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/orders/view/widgets/custom_card_orders.dart';
 
 class OrdersBody extends StatelessWidget {

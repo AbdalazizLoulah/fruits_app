@@ -9,18 +9,18 @@ class CustomListCategory extends StatelessWidget {
   });
 
   final double h;
-  final List<String> items;
+  final List<Map<String, dynamic>> items;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: h * 0.10,
+      height: h * 0.14,
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         itemCount: items.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, count) {
-          return CategoryItem(h: h, image: items[count]);
+          return CategoryItem(h: h, image: items[count]["image"],title: items[count]["title"],);
         },
       ),
     );

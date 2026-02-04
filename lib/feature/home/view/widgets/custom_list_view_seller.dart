@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_card_seller.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomListViewSeller extends StatelessWidget {
-  const CustomListViewSeller({super.key, required this.h, required this.w, required this.itemCount});
+  const CustomListViewSeller({
+    super.key,
+    required this.h,
+    required this.w,
+    required this.itemCount,
+  });
 
   final double h;
   final double w;
@@ -16,7 +22,12 @@ class CustomListViewSeller extends StatelessWidget {
         padding: EdgeInsets.only(top: h * 0.01),
         itemCount: itemCount,
         itemBuilder: (context, count) {
-          return CustomCardSeller(h: h, w: w);
+          return GestureDetector(
+            onTap: () {
+              context.go('/detailsSeller');
+            },
+            child: CustomCardSeller(h: h, w: w),
+          );
         },
       ),
     );
