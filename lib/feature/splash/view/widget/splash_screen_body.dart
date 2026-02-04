@@ -11,7 +11,7 @@ class SplashScreenBody extends StatefulWidget {
 class _SplashScreenBodyState extends State<SplashScreenBody> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 3), () {
       context.go('/onboard');
     });
     super.initState();

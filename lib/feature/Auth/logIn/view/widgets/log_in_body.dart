@@ -97,7 +97,7 @@ class _LogInBodyState extends State<LogInBody> {
                 CustomBottom(
                   onTap: () {
                     if (key.currentState!.validate()) {
-                      context.go('/signIn');
+                      context.go('/nav');
                     }
                   },
                   width: double.infinity,

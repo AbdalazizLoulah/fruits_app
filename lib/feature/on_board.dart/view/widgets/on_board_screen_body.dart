@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
+import 'package:fruits_app/core/widget/custom_indicator.dart';
 import 'package:fruits_app/feature/on_board.dart/view/widgets/custom_on_borde.dart';
 import 'package:fruits_app/feature/on_board.dart/view/widgets/skip_bottom.dart';
 import 'package:go_router/go_router.dart';
@@ -52,15 +53,8 @@ class _OnBoardScreenBodyState extends State<OnBoardScreenBody> {
             SizedBox(height: h * 0.03),
             CustomOnBoard(pageController: _pageController),
             SizedBox(height: h * 0.06),
-            SmoothPageIndicator(
-              controller: _pageController,
-              count: 3,
-              effect: WormEffect(
-                dotHeight: 8,
-                dotWidth: 8,
-                activeDotColor: ColorApp.green,
-              ),
-            ),
+            CustomIndicator(pageController: _pageController,count:3),
+          
             SizedBox(height: h * 0.06),
             CustomBottom(
               colorText: Colors.white,

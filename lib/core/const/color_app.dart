@@ -6,5 +6,6 @@ class ColorApp {
   static Color black = Color(0xff2F2E41);
   static Color openGray = Color(0xff858D9A);
   static Color blue = Color(0xff005B96);
+  static Color openBlue = Color(0xff00A29A);
 }
 

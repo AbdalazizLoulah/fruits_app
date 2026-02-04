@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({super.key, required this.h, required this.image});
+
+  final double h;
+  final String image;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: h * 0.01, vertical: h * 0.01),
+      child: Container(
+        // height: h * 0.09,
+        // width: h * 0.10,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              spreadRadius: 0.1,
+              offset: Offset(0, 5),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadiusGeometry.circular(10),
+          child: Image.asset(image, fit: BoxFit.fill),
+        ),
+      ),
+    );
+  }
+}
