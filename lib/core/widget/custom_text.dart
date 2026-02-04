@@ -6,17 +6,25 @@ class CustomText extends StatelessWidget {
     required this.fontSize,
     required this.color,
     required this.title,
-    this.fontFamily=true,
+    this.fontFamily = true, this.onTap,
   });
   final double fontSize;
   final Color color;
   final String title;
   final bool fontFamily;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(color: color, fontSize: fontSize, fontFamily:fontFamily? "Bold":"Regular"),
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        title,
+        style: TextStyle(
+          color: color,
+          fontSize: fontSize,
+          fontFamily: fontFamily ? "Bold" : "Regular",
+        ),
+      ),
     );
   }
 }

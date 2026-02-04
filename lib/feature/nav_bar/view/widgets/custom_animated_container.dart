@@ -4,13 +4,14 @@ class CustomAnimatedContainer extends StatelessWidget {
   const CustomAnimatedContainer({
     super.key,
     required this.isSelected,
-    required this.items, required this.index,
+    required this.items,
+    required this.index, required this.size,
   });
 
   final bool isSelected;
   final List<Map<String, dynamic>> items;
   final int index;
-
+  final double size;
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -23,6 +24,7 @@ class CustomAnimatedContainer extends StatelessWidget {
       child: Row(
         children: [
           Icon(
+            size: size,
             items[index]["icon"],
             color: isSelected ? Color(0xFF1F6A4A) : Colors.white,
           ),

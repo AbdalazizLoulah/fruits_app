@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/feature/home/view/widgets/home_body.dart';
 import 'package:fruits_app/feature/nav_bar/view/widgets/custom_animated_container.dart';
+import 'package:fruits_app/feature/orders/view/orders_screen.dart';
 
 class CustomBottomNav extends StatefulWidget {
   const CustomBottomNav({super.key});
@@ -13,7 +14,7 @@ class _HomeScreenState extends State<CustomBottomNav> {
   int currentIndex = 0;
   List<Widget> screens = [
     HomeBody(),
-    Center(child: Text("Your Page orders", style: TextStyle(fontSize: 22))),
+    OrdersScreen(),
     Center(child: Text("Your Page basket", style: TextStyle(fontSize: 22))),
     Center(child: Text("Your Page favorite", style: TextStyle(fontSize: 22))),
     Center(child: Text("Your Page more", style: TextStyle(fontSize: 22))),
@@ -43,13 +44,13 @@ class _HomeScreenState extends State<CustomBottomNav> {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(items.length, (index) => navItem(index)),
+          children: List.generate(items.length, (index) => navItem(index,h)),
         ),
       ),
     );
   }
 
-  Widget navItem(int index) {
+  Widget navItem(int index,double h) {
     bool isSelected = currentIndex == index;
     return GestureDetector(
       onTap: () {
@@ -58,6 +59,7 @@ class _HomeScreenState extends State<CustomBottomNav> {
         });
       },
       child: CustomAnimatedContainer(
+        size:h*0.035,
         isSelected: isSelected,
         items: items,
         index: index,

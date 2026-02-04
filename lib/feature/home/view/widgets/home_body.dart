@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:fruits_app/core/const/color_app.dart';
-import 'package:fruits_app/core/widget/category_item.dart';
+
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_list_category.dart';
-import 'package:fruits_app/core/widget/custom_list_view.dart';
+import 'package:fruits_app/feature/home/view/widgets/custom_list_view_seller.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/home/view/widgets/custom_dialog.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_slider.dart';
 
 class HomeBody extends StatelessWidget {
@@ -27,7 +29,17 @@ class HomeBody extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: h * 0.05),
-            CustomAppBar(),
+            CustomAppBar(
+              title: "Fruit Market",
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CustomDialog(h: h, w: w);
+                  },
+                );
+              },
+            ),
             SizedBox(height: h * 0.02),
             CustomSlider(h: h, pageController: _pageController),
             SizedBox(height: h * 0.02),
@@ -49,7 +61,9 @@ class HomeBody extends StatelessWidget {
                 ),
               ],
             ),
-            CustomListView(h: h, w: w),
+            Expanded(
+              child: CustomListViewSeller(h: h, w: w,itemCount: 3,),
+            ),
           ],
         ),
       ),

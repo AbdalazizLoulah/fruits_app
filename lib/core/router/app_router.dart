@@ -1,10 +1,10 @@
 import 'package:fruits_app/feature/Auth/forgetPassword/view/forget_password.dart';
 import 'package:fruits_app/feature/Auth/logIn/view/log_in_screen.dart';
 import 'package:fruits_app/feature/Auth/otp/view/otp_screen.dart';
-import 'package:fruits_app/feature/Auth/otp/view/widgets/otp_body.dart';
+
 import 'package:fruits_app/feature/Auth/signUp/view/sign_in_screen.dart';
 import 'package:fruits_app/feature/home/view/home_screen.dart';
-import 'package:fruits_app/feature/home/view/widgets/home_body.dart';
+
 import 'package:fruits_app/feature/nav_bar/view/navigate_screen.dart';
 import 'package:fruits_app/feature/on_board.dart/view/on_board_screen.dart';
 import 'package:fruits_app/feature/splash/view/splash_screen.dart';
@@ -26,10 +26,9 @@ class AppRouter {
         path: '/signUp',
         builder: (context, state) => SignInScreen(),
       ),
-      GoRoute(path: '/otp', builder: (context, state) => OtpBody()),
+      GoRoute(path: '/otp', builder: (context, state) => OtpScreen()),
       GoRoute(path: '/nav', builder: (context, state) => NavigateScreen()),
       GoRoute(path: '/home', builder: (context, state) => HomeScreen()),
-      GoRoute(path: '/homebody', builder: (context, state) => HomeBody()),
     ],
   );
 }

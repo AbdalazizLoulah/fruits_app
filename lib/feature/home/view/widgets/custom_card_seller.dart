@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
-class CustomCard extends StatelessWidget {
-  const CustomCard({
+class CustomCardSeller extends StatelessWidget {
+  const CustomCardSeller({
     super.key,
     required this.h,
     required this.w,
@@ -12,7 +12,6 @@ class CustomCard extends StatelessWidget {
 
   final double h;
   final double w;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -84,14 +83,13 @@ class CustomCard extends StatelessWidget {
                         fontSize: h * 0.013,
                         color: ColorApp.green,
                         title: "open",
-                        fontFamily: false,
                       ),
                       SizedBox(width: w*0.05,),
                       SvgPicture.asset("assets/image/point.svg"),
                       SizedBox(width: w * 0.01),
                       CustomText(
                         fontSize: h * 0.013,
-                        color: ColorApp.green,
+                        color: ColorApp.blue,
                         title: "Beverages",
                         fontFamily: false,
                       ),

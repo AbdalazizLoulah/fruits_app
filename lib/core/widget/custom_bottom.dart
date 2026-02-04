@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 import 'package:fruits_app/core/widget/custom_text.dart';
 
 class CustomBottom extends StatelessWidget {
@@ -16,7 +15,7 @@ class CustomBottom extends StatelessWidget {
     required this.colorBottom,
     required this.colorText,
     this.icon,
-    this.addIcon = false,
+    this.addIcon = false,this.addBorder=true,
   });
   final void Function()? onTap;
   final double heightBottom;
@@ -28,6 +27,7 @@ class CustomBottom extends StatelessWidget {
   final Color colorText;
   final IconData? icon;
   final bool addIcon;
+  final bool addBorder;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -37,7 +37,7 @@ class CustomBottom extends StatelessWidget {
           height: heightBottom,
           width: width,
           decoration: BoxDecoration(
-            border: Border.all(color:Colors.grey),
+            border:addBorder? Border.all(color: Colors.grey):Border(),
             borderRadius: BorderRadius.circular(30),
             color: colorBottom,
           ),
@@ -45,10 +45,18 @@ class CustomBottom extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                addIcon?SvgPicture.asset("assets/image/google_logo.svg"):SizedBox(),
-                icon==null? SizedBox() :Icon( icon,size: heightText+4,color: colorText,),
-                SizedBox(width:3 ,),
-                CustomText(fontSize: heightText, color: colorText, title: title),
+                addIcon
+                    ? SvgPicture.asset("assets/image/google_logo.svg")
+                    : SizedBox(),
+                icon == null
+                    ? SizedBox()
+                    : Icon(icon, size: heightText + 4, color: colorText),
+                SizedBox(width: 3),
+                CustomText(
+                  fontSize: heightText,
+                  color: colorText,
+                  title: title,
+                ),
               ],
             ),
           ),
