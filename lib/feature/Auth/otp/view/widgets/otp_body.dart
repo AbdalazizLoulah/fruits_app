@@ -3,7 +3,6 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_link_page.dart';
 import 'package:fruits_app/core/widget/custom_name_app.dart';
-import 'package:fruits_app/core/widget/custom_phone_text_field.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';

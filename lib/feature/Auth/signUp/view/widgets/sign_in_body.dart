@@ -55,7 +55,7 @@ class SignInBody extends StatelessWidget {
                 fontSize: h * 0.02,
                 helper: "Password *",
                 hint: "Password",
-                controller: nameController,
+                controller: passwordController,
               ),
               SizedBox(height: h * 0.04),
               CustomBottom(
