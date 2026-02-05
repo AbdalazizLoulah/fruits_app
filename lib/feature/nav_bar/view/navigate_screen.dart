@@ -6,8 +6,9 @@ class NavigateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: CustomBottomNav(),
-    );
+    return CustomBottomNav();
+    // return Scaffold(
+    //   bottomNavigationBar: CustomBottomNav(),
+    // );
   }
 }

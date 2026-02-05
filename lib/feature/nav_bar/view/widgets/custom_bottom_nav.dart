@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_app/feature/basket/view/basket_screen.dart';
+import 'package:fruits_app/feature/favorite/view/favorite_screen.dart';
 import 'package:fruits_app/feature/home/view/widgets/home_body.dart';
+import 'package:fruits_app/feature/more/view/more_screen.dart';
 import 'package:fruits_app/feature/nav_bar/view/widgets/custom_animated_container.dart';
 import 'package:fruits_app/feature/orders/view/orders_screen.dart';
 
@@ -15,9 +18,9 @@ class _HomeScreenState extends State<CustomBottomNav> {
   List<Widget> screens = [
     HomeBody(),
     OrdersScreen(),
-    Center(child: Text("Your Page basket", style: TextStyle(fontSize: 22))),
-    Center(child: Text("Your Page favorite", style: TextStyle(fontSize: 22))),
-    Center(child: Text("Your Page more", style: TextStyle(fontSize: 22))),
+    BasketScreen(),
+    FavoriteScreen(),
+    MoreScreen(),
   ];
   final List<Map<String, dynamic>> items = [
     {"icon": Icons.home_outlined, "label": "Home"},

@@ -7,10 +7,18 @@ class CustomProductCart extends StatelessWidget {
     super.key,
     required this.h,
     required this.w,
+    this.add = true,
+    this.addBottom = true,
+    this.icon,
+    required  this.title,
   });
 
   final double h;
   final double w;
+  final bool? add;
+  final bool? addBottom;
+  final IconData? icon;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +52,7 @@ class CustomProductCart extends StatelessWidget {
                       bottom: h * 0.01,
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(
-                        50,
-                      ),
+                      borderRadius: BorderRadiusGeometry.circular(50),
                       child: Image.asset("assets/image/Fruits.png"),
                     ),
                   ),
@@ -82,34 +88,85 @@ class CustomProductCart extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: h * 0.01),
-                        Container(
+                        title.isEmpty? Container(
                           height: h * 0.03,
                           width: w * 0.3,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: const Color.fromARGB(
-                              255,
-                              215,
-                              132,
-                              126,
-                            ),
+                            color: const Color.fromARGB(255, 215, 132, 126),
                           ),
-                          child: Center(
+                          child:Center(
                             child: CustomText(
                               fontSize: h * 0.013,
                               color: Colors.white,
                               title: " Up to 10% Off",
                             ),
                           ),
-                        ),
+                        ):CustomText(
+                              fontSize: h * 0.013,
+                              color: Colors.black,
+                              title: title,
+                            ),
                       ],
                     ),
                   ),
                   SizedBox(width: w * 0.04),
-                  Image.asset(
-                    "assets/image/pasket.png",
-                    height: h * 0.07,
-                  ),
+                  add == false
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: h * 0.09,
+                                bottom: h * 0.02,
+                              ),
+                              child: Icon(icon, size: h * 0.037),
+                            ),
+                            addBottom == true
+                                ? Container(
+                                    height: h * 0.035,
+                                    width: h * 0.133,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          blurRadius: 10,
+                                          spreadRadius: 2,
+                                          offset: Offset(
+                                            0,
+                                            4,
+                                          ), // shadow position
+                                        ),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Icon(Icons.add),
+                                          Text(
+                                            "1",
+                                            style: TextStyle(
+                                              fontSize: h * 0.02,
+                                            ),
+                                          ),
+                                          Icon(Icons.remove),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(),
+                          ],
+                        )
+                      : Container(
+                          child: Image.asset(
+                            "assets/image/pasket.png",
+                            height: h * 0.07,
+                          ),
+                        ),
                 ],
               ),
             ),

@@ -62,7 +62,7 @@ class DetailsSellerBody extends StatelessWidget {
                         onTap: () {
                           context.go('/product');
                         },
-                        child: CustomProductCart(h: h, w: w),
+                        child: CustomProductCart(h: h, w: w,title: "",),
                       );
                     },
                   ),
