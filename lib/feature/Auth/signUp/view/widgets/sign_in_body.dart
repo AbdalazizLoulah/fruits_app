@@ -32,6 +32,7 @@ class SignInBody extends StatelessWidget {
               CustomNameApp(des: "Sign Up to Wikala"),
               SizedBox(height: h * 0.04),
               CustomTextFormField(
+                h: h,
                 fontSize: h * 0.02,
                 helper: "Full name *",
                 hint: "First And Last Name",
@@ -39,6 +40,7 @@ class SignInBody extends StatelessWidget {
               ),
               SizedBox(height: h * 0.02),
               CustomPhoneTextField(
+                helper: "Phone Number *",
                 validator: (phone) {
                   if (phone == null || phone.number.isEmpty) {
                     return "Please enter your phone number";
@@ -52,6 +54,7 @@ class SignInBody extends StatelessWidget {
               ),
               SizedBox(height: h * 0.02),
               CustomTextFormField(
+                h: h,
                 fontSize: h * 0.02,
                 helper: "Password *",
                 hint: "Password",

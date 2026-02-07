@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/feature/orders/view/widgets/custom_card_orders.dart';
+import 'package:go_router/go_router.dart';
 
 class OrdersBody extends StatelessWidget {
   const OrdersBody({super.key});
@@ -16,10 +17,15 @@ class OrdersBody extends StatelessWidget {
           CustomAppBar(centerTitle: true, title: "My Orders"),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsetsDirectional.only(top: h*0.02),
+              padding: EdgeInsetsDirectional.only(top: h * 0.02),
               itemCount: 4,
               itemBuilder: (context, count) {
-                return CustomCardOrders(h: h, w: w);
+                return GestureDetector(
+                  onTap: () {
+                    context.go('/orderTracking');
+                  },
+                  child: CustomCardOrders(h: h, w: w),
+                );
               },
             ),
           ),

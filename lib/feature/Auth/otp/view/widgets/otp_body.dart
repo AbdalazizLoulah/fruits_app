@@ -12,7 +12,7 @@ class OtpBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
+    // final TextEditingController controller = TextEditingController();
     var h = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Container(

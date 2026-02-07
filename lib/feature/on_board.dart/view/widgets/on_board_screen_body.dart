@@ -5,7 +5,6 @@ import 'package:fruits_app/core/widget/custom_indicator.dart';
 import 'package:fruits_app/feature/on_board.dart/view/widgets/custom_on_borde.dart';
 import 'package:fruits_app/feature/on_board.dart/view/widgets/skip_bottom.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardScreenBody extends StatefulWidget {
   const OnBoardScreenBody({super.key});

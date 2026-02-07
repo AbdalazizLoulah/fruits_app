@@ -11,10 +11,11 @@ class CustomPhoneTextField extends StatelessWidget {
   const CustomPhoneTextField({
     Key? key,
     required this.controller,
-    this.validator,
+    this.validator, required this.helper,
   });
   final TextEditingController controller;
   final FutureOr<String?> Function(PhoneNumber?)? validator;
+  final String helper;
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -24,13 +25,13 @@ class CustomPhoneTextField extends StatelessWidget {
         CustomText(
           fontSize: h * 0.02,
           color: ColorApp.openGray,
-          title: "Phone Number *",
+          title: helper,
         ),
         SizedBox(height: h * 0.01),
-            IntlPhoneField(
-              autovalidateMode: AutovalidateMode.always,
+        IntlPhoneField(
+          autovalidateMode: AutovalidateMode.always,
 
-              validator: validator,
+          validator: validator,
           controller: controller,
           cursorColor: ColorApp.gray,
           showCountryFlag: false,
@@ -50,7 +51,6 @@ class CustomPhoneTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(25),
             ),
           ),
-          
         ),
       ],
     );

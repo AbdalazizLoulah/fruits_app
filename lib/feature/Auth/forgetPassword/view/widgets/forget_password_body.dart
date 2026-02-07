@@ -28,6 +28,7 @@ class ForgetPasswordBody extends StatelessWidget {
               CustomNameApp(des: "Enter your Number"),
               SizedBox(height: h * 0.04),
               CustomPhoneTextField(
+                helper: "Phone Number *",
                 validator: (phone) {
                   if (phone == null || phone.number.isEmpty) {
                     return "Please enter your phone number";

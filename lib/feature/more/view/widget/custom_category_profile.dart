@@ -7,13 +7,15 @@ class CustomCategoryProfile extends StatelessWidget {
     super.key,
     required this.h,
     required this.w,
-    required this.icon, required this.title,
+    required this.icon,
+    required this.title, this.onTap,
   });
 
   final double h;
   final double w;
   final IconData icon;
   final String title;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +24,21 @@ class CustomCategoryProfile extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              child: Row(
-                children: [
-                  Icon(icon, size: h * 0.03,color: ColorApp.green,),
-                  SizedBox(width: w * 0.02),
-                  CustomText(
-                    fontSize: h * 0.019,
-                    color: ColorApp.black,
-                    title: title,
-                    fontFamily: false,
-                  ),
-                ],
+            child: GestureDetector(
+              onTap: onTap,
+              child: Container(
+                child: Row(
+                  children: [
+                    Icon(icon, size: h * 0.03, color: ColorApp.green),
+                    SizedBox(width: w * 0.02),
+                    CustomText(
+                      fontSize: h * 0.019,
+                      color: ColorApp.black,
+                      title: title,
+                      fontFamily: false,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

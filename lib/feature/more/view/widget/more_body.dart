@@ -4,6 +4,7 @@ import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/more/view/widget/custom_category_profile.dart';
+import 'package:go_router/go_router.dart';
 
 class MoreBody extends StatelessWidget {
   const MoreBody({super.key});
@@ -50,7 +51,15 @@ class MoreBody extends StatelessWidget {
               colorText: Colors.white,
             ),
             SizedBox(height: h * 0.04),
-            CustomCategoryProfile(h: h, w: w,icon: Icons.person_3_outlined,title: "Profile",),
+            CustomCategoryProfile(
+              onTap: () {
+                context.go('/profile');
+              },
+              h: h,
+              w: w,
+              icon: Icons.person_3_outlined,
+              title: "Profile",
+            ),
             SizedBox(height: h * 0.04),
             CustomCategoryProfile(
               h: h,
@@ -67,6 +76,48 @@ class MoreBody extends StatelessWidget {
             ),
             SizedBox(height: h * 0.04),
             CustomCategoryProfile(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    backgroundColor: Colors.white,
+                    child: Container(
+                      height: h * 0.3,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: h * 0.01),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Checkbox(value: false, onChanged: (value) {}),
+                            Checkbox(value: false, onChanged: (value) {}),
+                            SizedBox(height: h * 0.03),
+                            CustomBottom(
+                              width: w * 0.5,
+                              title: "Apply",
+                              heightBottom: h * 0.06,
+                              heightText: h * 0.02,
+                              colorBottom: ColorApp.green,
+                              colorText: Colors.white,
+                            ),
+                            SizedBox(height: h * 0.03),
+                            GestureDetector(
+                              onTap: () => context.pop(),
+                              child: Center(
+                                child: CustomText(
+                                  fontSize: h * 0.03,
+                                  color: ColorApp.gray,
+                                  title: "Close",
+                                  fontFamily: false,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
               h: h,
               w: w,
               icon: Icons.language,
@@ -74,6 +125,9 @@ class MoreBody extends StatelessWidget {
             ),
             SizedBox(height: h * 0.04),
             CustomCategoryProfile(
+              onTap: () {
+                context.go('/contact');
+              },
               h: h,
               w: w,
               icon: Icons.headphones_rounded,
@@ -81,18 +135,21 @@ class MoreBody extends StatelessWidget {
             ),
             SizedBox(height: h * 0.04),
             CustomCategoryProfile(
+              onTap: () {
+                context.go('/team');
+              },
               h: h,
               w: w,
               icon: Icons.handshake,
               title: "Terms & Conditions",
             ),
             SizedBox(height: h * 0.04),
-            // CustomCategoryProfile(
-            //   h: h,
-            //   w: w,
-            //   icon: Icons.person_3_outlined,
-            //   title: "Terms & Conditions",
-            // ),
+            CustomCategoryProfile(
+              h: h,
+              w: w,
+              icon: Icons.info_outline,
+              title: "About Us",
+            ),
           ],
         ),
       ),

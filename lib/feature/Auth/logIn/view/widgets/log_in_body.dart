@@ -48,6 +48,7 @@ class _LogInBodyState extends State<LogInBody> {
                 CustomNameApp(des: "Login to Wikala"),
                 SizedBox(height: h * 0.02),
                 CustomPhoneTextField(
+                  helper: "Phone Number *",
                   controller: phoneController,
                   validator: (phone) {
                     if (phone == null || phone.number.isEmpty) {
@@ -61,6 +62,7 @@ class _LogInBodyState extends State<LogInBody> {
                 ),
                 SizedBox(height: h * 0.01),
                 CustomTextFormField(
+                  h: h,
                   obscureText: true,
                   controller: passwordController,
                   validator: (value) {

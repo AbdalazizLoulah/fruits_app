@@ -3,11 +3,28 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/basket/view/basket_screen.dart';
 import 'package:fruits_app/feature/basket/view/widgets/custom_total.dart';
 import 'package:fruits_app/feature/details_seller/view/widgets/custom_product_cart.dart';
 
-class BasketBody extends StatelessWidget {
-  const BasketBody({super.key});
+class BasketBody extends StatefulWidget {
+  const BasketBody({super.key,});
+  // final PageController controller;
+  // final currentStep;
+  @override
+  State<BasketBody> createState() => _BasketBodyState();
+}
+
+class _BasketBodyState extends State<BasketBody> {
+  // void nextStep() {
+  //   if (widget.currentStep < 2) {
+  //     widget.controller.nextPage(
+  //       duration: const Duration(milliseconds: 300),
+  //       curve: Curves.easeInOut,
+  //     );
+  //     setState(() =>widget.currentStep.hashCode++);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +39,13 @@ class BasketBody extends StatelessWidget {
             child: ListView.builder(
               itemCount: 3,
               itemBuilder: (context, count) {
-                return CustomProductCart(h: h, w: w, add: false,icon: Icons.delete_forever_rounded,title: "",);
+                return CustomProductCart(
+                  h: h,
+                  w: w,
+                  add: false,
+                  icon: Icons.delete_forever_rounded,
+                  title: "",
+                );
               },
             ),
           ),
@@ -74,8 +97,8 @@ class BasketBody extends StatelessWidget {
                       ],
                     ),
                     CustomBottom(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Container(child: Center(child: Text("zezo"),),)));
+                      onTap: () {
+                      
                       },
                       width: h * 0.2,
                       title: "Procced To Checkout",
@@ -91,6 +114,158 @@ class BasketBody extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CheckoutView extends StatefulWidget {
+  const CheckoutView({super.key});
+
+  @override
+  State<CheckoutView> createState() => _CheckoutViewState();
+}
+
+class _CheckoutViewState extends State<CheckoutView> {
+  final PageController control = PageController();
+  int currentStep = 0;
+
+  void nextStep() {
+    if (currentStep < 2) {
+      control.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      setState(() => currentStep++);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    return Column(
+      children: [
+        SizedBox(height: h * 0.05),
+        CustomAppBar(title: "CheckOut", centerTitle: true),
+        StepperHeader(currentStep: currentStep),
+
+        Expanded(
+          child: PageView(
+            controller: control,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              BasketScreen(),
+              DeliveryTimeStep(),
+              AddressStep(),
+              PaymentStep(),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            width: double.infinity,
+            height: 55,
+            child: ElevatedButton(
+              onPressed: nextStep,
+              child: Text(currentStep == 3 ? "Place Order" : "Continue"),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class StepperHeader extends StatelessWidget {
+  final int currentStep;
+
+  const StepperHeader({super.key, required this.currentStep});
+
+  @override
+  Widget build(BuildContext context) {
+    final titles = ["Delivery Time", "Address", "Payment"];
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(3, (index) {
+        return Column(
+          children: [
+            CircleAvatar(
+              radius: 6,
+              backgroundColor: currentStep >= index
+                  ? Colors.green
+                  : Colors.grey,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              titles[index],
+              style: TextStyle(
+                fontSize: 12,
+                color: currentStep >= index ? Colors.green : Colors.grey,
+              ),
+            ),
+          ],
+        );
+      }),
+    );
+  }
+}
+
+class DeliveryTimeStep extends StatelessWidget {
+  const DeliveryTimeStep({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          title: const Text("Now"),
+          trailing: Radio(value: true, groupValue: true, onChanged: (_) {}),
+        ),
+
+        ListTile(
+          title: const Text("Select Delivery Time"),
+          subtitle: const Text("09 - 15 - 2021"),
+          trailing: const Icon(Icons.keyboard_arrow_down),
+        ),
+      ],
+    );
+  }
+}
+
+class AddressStep extends StatelessWidget {
+  const AddressStep({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        ListTile(
+          leading: Icon(Icons.location_on),
+          title: Text("Address 1"),
+          subtitle: Text("John Doe - Dubai"),
+          trailing: Icon(Icons.check_circle, color: Colors.green),
+        ),
+      ],
+    );
+  }
+}
+
+class PaymentStep extends StatelessWidget {
+  const PaymentStep({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        ListTile(
+          title: Text("Credit Card"),
+          trailing: Radio(value: 1, groupValue: 2, onChanged: null),
+        ),
+        ListTile(
+          title: Text("Cash on Delivery"),
+          trailing: Radio(value: 2, groupValue: 2, onChanged: null),
+        ),
+      ],
     );
   }
 }
