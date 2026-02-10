@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
@@ -69,7 +70,7 @@ class _OnBoardScreenBodyState extends State<OnBoardScreenBody> {
               },
               colorBottom: ColorApp.green,
               width: h * 0.2,
-              title: currentIndex == 2 ? "Get Started" : "Next",
+              title: currentIndex == 2 ? "get_started".tr() : "next".tr(),
               currentIndex: currentIndex,
               heightBottom: h * 0.06,
               heightText: h * 0.02,

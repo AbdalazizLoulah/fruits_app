@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
+import 'package:fruits_app/core/widget/custom_circle.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
 class CustomSelectWeight extends StatelessWidget {
@@ -44,12 +45,16 @@ class CustomSelectWeight extends StatelessWidget {
         Divider(),
         show
             ? SizedBox(
-                height: h * 0.15,
+                height: h * 0.1,
                 child: ListView.builder(
                   itemCount: itemCount,
                   itemBuilder: (context, count) {
                     return Row(
-                      children: [Checkbox(value: false, onChanged: (v) {}),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(9.0),
+                          child: CustomCircle(h: h * 0.5),
+                        ),
                       CustomText(fontSize: h*0.015, color: ColorApp.gray, title: "50 Gram - 4.00 KD")
                       ],
                     );

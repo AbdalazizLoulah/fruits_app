@@ -9,9 +9,14 @@ import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_dialog.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_slider.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
 
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> items = [
@@ -32,7 +37,7 @@ class HomeBody extends StatelessWidget {
             CustomAppBar(
               icon1: Icons.search,icon2: Icons.tune,
               title: "Fruit Market",
-              onTap: () {
+              onTap2: () {
                 showDialog(
                   context: context,
                   builder: (context) {

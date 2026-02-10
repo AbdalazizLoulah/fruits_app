@@ -22,9 +22,7 @@ class ContactUsBody extends StatelessWidget {
           CustomAppBar(
             title: "Contact Us",
             centerTitle: true,
-            // onTapArrow: () {
-            //   context.go('/more');
-            // },
+            onTap: () => context.go('/nav'),
           ),
           SizedBox(height: h * 0.02),
           Padding(

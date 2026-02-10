@@ -1,14 +1,23 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
+import 'package:fruits_app/core/widget/custom_circle.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/more/view/widget/custom_category_profile.dart';
+import 'package:fruits_app/feature/more/view/widget/custom_dialog_language.dart';
 import 'package:go_router/go_router.dart';
 
-class MoreBody extends StatelessWidget {
+class MoreBody extends StatefulWidget {
   const MoreBody({super.key});
 
+  @override
+  State<MoreBody> createState() => _MoreBodyState();
+}
+
+class _MoreBodyState extends State<MoreBody> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -79,43 +88,7 @@ class MoreBody extends StatelessWidget {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (context) => Dialog(
-                    backgroundColor: Colors.white,
-                    child: Container(
-                      height: h * 0.3,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: h * 0.01),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Checkbox(value: false, onChanged: (value) {}),
-                            Checkbox(value: false, onChanged: (value) {}),
-                            SizedBox(height: h * 0.03),
-                            CustomBottom(
-                              width: w * 0.5,
-                              title: "Apply",
-                              heightBottom: h * 0.06,
-                              heightText: h * 0.02,
-                              colorBottom: ColorApp.green,
-                              colorText: Colors.white,
-                            ),
-                            SizedBox(height: h * 0.03),
-                            GestureDetector(
-                              onTap: () => context.pop(),
-                              child: Center(
-                                child: CustomText(
-                                  fontSize: h * 0.03,
-                                  color: ColorApp.gray,
-                                  title: "Close",
-                                  fontFamily: false,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  builder: (context) => CustomDialogLanguage(h: h, w: w),
                 );
               },
               h: h,
@@ -156,3 +129,4 @@ class MoreBody extends StatelessWidget {
     );
   }
 }
+

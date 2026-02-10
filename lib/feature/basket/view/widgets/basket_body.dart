@@ -3,29 +3,17 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
-import 'package:fruits_app/feature/basket/view/basket_screen.dart';
 import 'package:fruits_app/feature/basket/view/widgets/custom_total.dart';
 import 'package:fruits_app/feature/details_seller/view/widgets/custom_product_cart.dart';
+import 'package:go_router/go_router.dart';
 
 class BasketBody extends StatefulWidget {
-  const BasketBody({super.key,});
-  // final PageController controller;
-  // final currentStep;
+  const BasketBody({super.key});
   @override
   State<BasketBody> createState() => _BasketBodyState();
 }
 
 class _BasketBodyState extends State<BasketBody> {
-  // void nextStep() {
-  //   if (widget.currentStep < 2) {
-  //     widget.controller.nextPage(
-  //       duration: const Duration(milliseconds: 300),
-  //       curve: Curves.easeInOut,
-  //     );
-  //     setState(() =>widget.currentStep.hashCode++);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -98,7 +86,7 @@ class _BasketBodyState extends State<BasketBody> {
                     ),
                     CustomBottom(
                       onTap: () {
-                      
+                        context.go('/chickOut');
                       },
                       width: h * 0.2,
                       title: "Procced To Checkout",
@@ -142,36 +130,42 @@ class _CheckoutViewState extends State<CheckoutView> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
-    return Column(
-      children: [
-        SizedBox(height: h * 0.05),
-        CustomAppBar(title: "CheckOut", centerTitle: true),
-        StepperHeader(currentStep: currentStep),
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(height: h * 0.05),
+          CustomAppBar(title: "CheckOut", centerTitle: true),
+          StepperHeader(currentStep: currentStep),
 
-        Expanded(
-          child: PageView(
-            controller: control,
-            physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              BasketScreen(),
-              DeliveryTimeStep(),
-              AddressStep(),
-              PaymentStep(),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: SizedBox(
-            width: double.infinity,
-            height: 55,
-            child: ElevatedButton(
-              onPressed: nextStep,
-              child: Text(currentStep == 3 ? "Place Order" : "Continue"),
+          Expanded(
+            child: PageView(
+              controller: control,
+              physics: const NeverScrollableScrollPhysics(),
+              children: const [
+                DeliveryTimeStep(),
+                AddressStep(),
+                PaymentStep(),
+              ],
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (currentStep == 2) {
+                    context.go('/signUp');
+                  }
+                  nextStep();
+                },
+                child: Text(currentStep == 2 ? "Place Order" : "Continue"),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -190,11 +184,16 @@ class StepperHeader extends StatelessWidget {
       children: List.generate(3, (index) {
         return Column(
           children: [
-            CircleAvatar(
-              radius: 6,
-              backgroundColor: currentStep >= index
-                  ? Colors.green
-                  : Colors.grey,
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 6,
+                  backgroundColor: currentStep >= index
+                      ? Colors.green
+                      : Colors.grey,
+                ),
+                Text(" - - - - - - - - - - - -")
+              ],
             ),
             const SizedBox(height: 4),
             Text(

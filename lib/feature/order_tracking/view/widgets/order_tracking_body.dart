@@ -3,8 +3,9 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
-import 'package:fruits_app/core/widget/custom_text_form_field.dart';
+import 'package:fruits_app/feature/order_tracking/view/widgets/custom_alert_cancel_order.dart';
 import 'package:fruits_app/feature/order_tracking/view/widgets/custom_dote_way.dart';
+import 'package:go_router/go_router.dart';
 
 class OrderTrackingBody extends StatelessWidget {
   const OrderTrackingBody({super.key});
@@ -18,7 +19,7 @@ class OrderTrackingBody extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: h * 0.05),
-          CustomAppBar(title: "OrderTracking", centerTitle: true),
+          CustomAppBar(title: "OrderTracking", centerTitle: true,onTap: ()=>context.go('/nav'),),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: h * 0.02),
             child: Column(
@@ -107,55 +108,7 @@ class OrderTrackingBody extends StatelessWidget {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  backgroundColor: Colors.white,
-                  content: Container(
-                    height: h * 0.4,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: h * 0.01),
-                      child: Column(
-                        children: [
-                          CustomText(
-                            fontSize: h * 0.02,
-                            color: Colors.black,
-                            title: "Cancel Order",
-                          ),
-                          CustomTextFormField(
-                            fontSize: h * 0.015,
-                            helper: "Reason",
-                            hint: "",
-                            controller: controller,
-                            h: h,
-                          ),
-                          CustomTextFormField(
-                            fontSize: h * 0.015,
-                            helper: "Note",
-                            hint: "",
-                            controller: controller,
-                            h: h,
-                            maxLine: 2,
-                          ),
-                          SizedBox(height: h * 0.02),
-                          CustomBottom(
-                            width: w * 0.8,
-                            title: "Confirm Cancelation",
-                            heightBottom: h * 0.05,
-                            heightText: h * 0.02,
-                            colorBottom: ColorApp.green,
-                            colorText: Colors.white,
-                          ),
-                          SizedBox(height: h * 0.015),
-                          CustomText(
-                            fontSize: h * 0.025,
-                            color: ColorApp.gray,
-                            title: "Close",
-                            fontFamily: false,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                builder: (context) => CustomAlertCancelOrder(h: h, controller: controller, w: w),
               );
             },
             width: w * 0.8,

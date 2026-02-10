@@ -27,7 +27,7 @@ class CategoryItem extends StatelessWidget {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(10),
+              borderRadius: BorderRadiusGeometry.circular(40),
               child: Image.asset(image, fit: BoxFit.fill),
             ),
           ),

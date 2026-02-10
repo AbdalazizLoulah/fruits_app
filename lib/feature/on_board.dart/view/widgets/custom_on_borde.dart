@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_app/feature/on_board.dart/view/widgets/custom_bord_screen.dart';
 
@@ -15,16 +16,16 @@ class CustomOnBoard extends StatelessWidget {
                 controller: pageController,
                 children: [
                   CustomBoardScreen(
-                    title: "E Shopping",
-                    des: "Explore op organic fruits & grab them",
+                    title: "onboard_title_1".tr(),
+                    des: "onboard_desc_1".tr(),
                   ),
                   CustomBoardScreen(
-                    title: "Delivery Arrived",
-                    des: "Order is arrived at your Place",
+                    title: "onboard_title_2".tr(),
+                    des: "onboard_desc_2".tr(),
                   ),
                   CustomBoardScreen(
-                    title: "E Shopping",
-                    des: "Order is arrived at your Place",
+                    title: "onboard_title_3".tr(),
+                    des: "onboard_desc_3".tr(),
                   ),
                 ],
               ),

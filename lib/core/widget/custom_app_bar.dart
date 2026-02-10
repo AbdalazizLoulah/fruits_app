@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
-import 'package:go_router/go_router.dart';
+
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -9,9 +9,11 @@ class CustomAppBar extends StatelessWidget {
     this.onTap,
     this.centerTitle = false,
     required this.title,
-    this.addIcons = false,this.icon1,this.icon2,
+    this.addIcons = false,this.icon1,this.icon2, this.onTap1, this.onTap2,
   });
   final Function()? onTap;
+  final Function()? onTap1;
+  final Function()? onTap2;
   final bool centerTitle;
   final String title;
   final bool addIcons;
@@ -31,7 +33,7 @@ class CustomAppBar extends StatelessWidget {
                 child: Row(
                   children: [
                     centerTitle ? GestureDetector(
-                      onTap: ()=> context.go('/nav'),
+                      onTap: onTap,
                       child: Icon(Icons.arrow_back_ios)) : SizedBox(),
                     Expanded(
                       child: centerTitle
@@ -53,10 +55,12 @@ class CustomAppBar extends StatelessWidget {
                         : Container(
                             child: Row(
                               children: [
-                                icon1==null? SizedBox() :Icon(icon1, color: ColorApp.green),
+                                icon1==null? SizedBox() :GestureDetector(
+                                  onTap: onTap1,
+                                  child: Icon(icon1, color: ColorApp.green)),
                                 SizedBox(width: h*0.01,),
                                 GestureDetector(
-                                  onTap: onTap,
+                                  onTap: onTap2,
                                   child:icon2==null? SizedBox(): Icon(icon2, color: ColorApp.green),
                                 ),
                               ],

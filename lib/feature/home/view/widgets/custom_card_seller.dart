@@ -40,62 +40,64 @@ class CustomCardSeller extends StatelessWidget {
                 child: Image.asset("assets/image/logo.png"),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: h*0.02,left: w*0.02),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            CustomText(
-                              fontSize: h * 0.02,
-                              color: Colors.black,
-                              title: "Seller name",
-                            ),
-                            SizedBox(width: h * 0.01),
-                            SvgPicture.asset("assets/image/mark.svg"),
-                          ],
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(top: h*0.02,left: w*0.02),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          child: Row(
+                            children: [
+                              CustomText(
+                                fontSize: h * 0.02,
+                                color: Colors.black,
+                                title: "Seller name",
+                              ),
+                              SizedBox(width: h * 0.01),
+                              SvgPicture.asset("assets/image/mark.svg"),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: h * 0.02),
-                  Row(
-                    children: [
-                      SvgPicture.asset("assets/image/motore.svg"),
-                      CustomText(
-                        fontSize: h * 0.012,
-                        color: ColorApp.gray,
-                        title: " Delivery Charges : 0.5 KD",
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: h * 0.02),
-                  Row(
-                    children: [
-                      SizedBox(width: w * 0.05),
-                      SvgPicture.asset("assets/image/point.svg"),
-                      SizedBox(width: w * 0.01),
-                      CustomText(
-                        fontSize: h * 0.013,
-                        color: ColorApp.green,
-                        title: "open",
-                      ),
-                      SizedBox(width: w*0.05,),
-                      SvgPicture.asset("assets/image/point.svg"),
-                      SizedBox(width: w * 0.01),
-                      CustomText(
-                        fontSize: h * 0.013,
-                        color: ColorApp.blue,
-                        title: "Beverages",
-                        fontFamily: false,
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      children: [
+                        SvgPicture.asset("assets/image/motore.svg"),
+                        CustomText(
+                          fontSize: h * 0.012,
+                          color: ColorApp.gray,
+                          title: " Delivery Charges : 0.5 KD",
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: h * 0.02),
+                    Row(
+                      children: [
+                        SizedBox(width: w * 0.05),
+                        SvgPicture.asset("assets/image/point.svg"),
+                        SizedBox(width: w * 0.01),
+                        CustomText(
+                          fontSize: h * 0.013,
+                          color: ColorApp.green,
+                          title: "open",
+                        ),
+                        SizedBox(width: w*0.05,),
+                        SvgPicture.asset("assets/image/point.svg"),
+                        SizedBox(width: w * 0.01),
+                        CustomText(
+                          fontSize: h * 0.013,
+                          color: ColorApp.blue,
+                          title: "Beverages",
+                          fontFamily: false,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(

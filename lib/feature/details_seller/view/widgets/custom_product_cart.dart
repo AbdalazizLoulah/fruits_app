@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
-class CustomProductCart extends StatelessWidget {
+class CustomProductCart extends StatefulWidget {
   const CustomProductCart({
     super.key,
     required this.h,
@@ -10,7 +10,7 @@ class CustomProductCart extends StatelessWidget {
     this.add = true,
     this.addBottom = true,
     this.icon,
-    required  this.title,
+    required this.title,
   });
 
   final double h;
@@ -21,15 +21,21 @@ class CustomProductCart extends StatelessWidget {
   final String title;
 
   @override
+  State<CustomProductCart> createState() => _CustomProductCartState();
+}
+
+class _CustomProductCartState extends State<CustomProductCart> {
+  int counter = 1;
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: h * 0.01),
+      padding: EdgeInsets.symmetric(horizontal: widget.h * 0.01),
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: h * 0.01),
+            padding: EdgeInsets.only(bottom: widget.h * 0.01),
             child: Container(
-              height: h * 0.14,
+              height: widget.h * 0.14,
               width: double.infinity,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -47,114 +53,147 @@ class CustomProductCart extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      top: h * 0.01,
-                      left: h * 0.01,
-                      bottom: h * 0.01,
+                      top: widget.h * 0.01,
+                      left: widget.h * 0.01,
+                      bottom: widget.h * 0.01,
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadiusGeometry.circular(50),
                       child: Image.asset("assets/image/Fruits.png"),
                     ),
                   ),
-                  SizedBox(width: w * 0.03),
-                  Padding(
-                    padding: EdgeInsets.only(top: h * 0.02),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              child: Row(
-                                children: [
-                                  CustomText(
-                                    fontSize: h * 0.016,
-                                    color: Colors.black,
-                                    title: "Product name",
-                                  ),
-                                ],
+                  SizedBox(width: widget.w * 0.03),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: widget.h * 0.02),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                child: Row(
+                                  children: [
+                                    CustomText(
+                                      fontSize: widget.h * 0.016,
+                                      color: Colors.black,
+                                      title: "Product name",
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: h * 0.01),
-                        Row(
-                          children: [
-                            CustomText(
-                              fontSize: h * 0.013,
-                              color: ColorApp.gray,
-                              title: " 12.00KD",
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: h * 0.01),
-                        title.isEmpty? Container(
-                          height: h * 0.03,
-                          width: w * 0.3,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color.fromARGB(255, 215, 132, 126),
+                            ],
                           ),
-                          child:Center(
-                            child: CustomText(
-                              fontSize: h * 0.013,
-                              color: Colors.white,
-                              title: " Up to 10% Off",
-                            ),
+                          SizedBox(height: widget.h * 0.01),
+                          Row(
+                            children: [
+                              CustomText(
+                                fontSize: widget.h * 0.013,
+                                color: ColorApp.gray,
+                                title: " 12.00KD",
+                              ),
+                            ],
                           ),
-                        ):CustomText(
-                              fontSize: h * 0.013,
-                              color: Colors.black,
-                              title: title,
-                            ),
-                      ],
+                          SizedBox(height: widget.h * 0.01),
+                          widget.title.isEmpty
+                              ? Container(
+                                  height: widget.h * 0.03,
+                                  width: widget.w * 0.3,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: const Color.fromARGB(
+                                      255,
+                                      215,
+                                      132,
+                                      126,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: CustomText(
+                                      fontSize: widget.h * 0.013,
+                                      color: Colors.white,
+                                      title: " Up to 10% Off",
+                                    ),
+                                  ),
+                                )
+                              : CustomText(
+                                  fontSize: widget.h * 0.013,
+                                  color: Colors.black,
+                                  title: widget.title,
+                                ),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(width: w * 0.04),
-                  add == false
+                  SizedBox(width: widget.w * 0.04),
+                  widget.add == false
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                left: h * 0.09,
-                                bottom: h * 0.02,
+                                left: widget.h * 0.09,
+                                bottom: widget.h * 0.06,
+                                right: widget.h * 0.01,
                               ),
-                              child: Icon(icon, size: h * 0.037),
+                              child: Icon(widget.icon, size: widget.h * 0.037),
                             ),
-                            addBottom == true
-                                ? Container(
-                                    height: h * 0.035,
-                                    width: h * 0.133,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
-                                          blurRadius: 10,
-                                          spreadRadius: 2,
-                                          offset: Offset(
-                                            0,
-                                            4,
-                                          ), // shadow position
-                                        ),
-                                      ],
+                            widget.addBottom == true
+                                ? Padding(
+                                    padding: EdgeInsets.only(
+                                      right: widget.h * 0.01,
                                     ),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Icon(Icons.add),
-                                          Text(
-                                            "1",
-                                            style: TextStyle(
-                                              fontSize: h * 0.02,
+                                    child: Container(
+                                      height: widget.h * 0.035,
+                                      width: widget.h * 0.133,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(
+                                              0.2,
                                             ),
+                                            blurRadius: 10,
+                                            spreadRadius: 2,
+                                            offset: Offset(
+                                              0,
+                                              4,
+                                            ), // shadow position
                                           ),
-                                          Icon(Icons.remove),
                                         ],
+                                      ),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  counter++;
+                                                });
+                                              },
+                                              child: Icon(Icons.add),
+                                            ),
+                                            Text(
+                                              counter.toString(),
+                                              style: TextStyle(
+                                                fontSize: widget.h * 0.02,
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  if (counter > 1) {
+                                                    counter--;
+                                                  }
+                                                });
+                                              },
+                                              child: Icon(Icons.remove),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   )
@@ -164,7 +203,7 @@ class CustomProductCart extends StatelessWidget {
                       : Container(
                           child: Image.asset(
                             "assets/image/pasket.png",
-                            height: h * 0.07,
+                            height: widget.h * 0.07,
                           ),
                         ),
                 ],

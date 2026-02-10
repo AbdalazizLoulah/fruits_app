@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:go_router/go_router.dart';
 
 class TeamAndConditionBody extends StatelessWidget {
   const TeamAndConditionBody({super.key});
@@ -13,7 +14,7 @@ class TeamAndConditionBody extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: h * 0.06),
-          CustomAppBar(title: "Terms and Conditions", centerTitle: true),
+          CustomAppBar(title: "Terms and Conditions", centerTitle: true,onTap: ()=>context.go('/nav'),),
 SizedBox(height: h * 0.02),
           Padding(
             padding:  EdgeInsets.symmetric(horizontal: h*0.02),

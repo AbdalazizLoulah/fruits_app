@@ -14,10 +14,10 @@ class CustomPosterProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset("assets/image/fruitShop.png"),
+        Image.asset("assets/image/fruitShop.png",height: h*0.3,width: double.infinity,),
         Positioned(
           top: h * 0.02,
-          left: h * 0.23,
+          left: h * 0.32,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),

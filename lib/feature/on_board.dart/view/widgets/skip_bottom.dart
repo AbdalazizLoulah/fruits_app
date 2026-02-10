@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
@@ -19,9 +20,9 @@ class SkipBottom extends StatelessWidget {
             child: Column(
               children: [
                 CustomText(
-                  fontSize: h * 0.025,
+                  fontSize: h * 0.022,
                   color: ColorApp.gray,
-                  title: "Skip",
+                  title: "skip".tr(),
                 ),
                 Divider(),
               ],
