@@ -28,12 +28,12 @@ class _HomeBodyState extends State<HomeBody> {
     PageController _pageController = PageController();
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final orientation = MediaQuery.of(context).orientation ==Orientation.portrait;
     return Container(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: h * 0.02),
         child: Column(
           children: [
-            SizedBox(height: h * 0.05),
             CustomAppBar(
               icon1: Icons.search,icon2: Icons.tune,
               title: "Fruit Market",
@@ -49,7 +49,7 @@ class _HomeBodyState extends State<HomeBody> {
             SizedBox(height: h * 0.02),
             CustomSlider(h: h, pageController: _pageController),
             SizedBox(height: h * 0.02),
-            CustomListCategory(h: h, items: items),
+            CustomListCategory(h: h, items: items,orientation: orientation,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -67,7 +67,7 @@ class _HomeBodyState extends State<HomeBody> {
               ],
             ),
             Expanded(
-              child: CustomListViewSeller(h: h, w: w,itemCount: 3,),
+              child: CustomListViewSeller(h: h, w: w,itemCount: 3,orientation:orientation ,),
             ),
           ],
         ),

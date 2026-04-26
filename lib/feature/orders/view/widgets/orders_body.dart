@@ -10,25 +10,46 @@ class OrdersBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Container(
       child: Column(
         children: [
-          SizedBox(height: h * 0.055),
           CustomAppBar(centerTitle: true, title: "My Orders"),
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsetsDirectional.only(top: h * 0.02),
-              itemCount: 4,
-              itemBuilder: (context, count) {
-                return GestureDetector(
-                  onTap: () {
-                    context.go('/orderTracking');
-                  },
-                  child: CustomCardOrders(h: h, w: w),
-                );
-              },
-            ),
-          ),
+          orientation
+              ? Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsetsDirectional.only(top: h * 0.02),
+                    itemCount: 4,
+                    itemBuilder: (context, count) {
+                      return GestureDetector(
+                        onTap: () {
+                          context.go('/orderTracking');
+                        },
+                        child: CustomCardOrders(h: h, w: w),
+                      );
+                    },
+                  ),
+                )
+              : Expanded(
+                  child: GridView.builder(
+                    padding: const EdgeInsets.all(12),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 1,
+                      crossAxisSpacing: 1,
+                      childAspectRatio: 6,
+                    ),
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                          onTap: () {
+                          context.go('/orderTracking');
+                        },
+                        child: CustomCardOrders(h: h, w: w,orientation: true,));
+                    },
+                  ),
+                ),
         ],
       ),
     );

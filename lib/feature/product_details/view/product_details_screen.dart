@@ -6,9 +6,11 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ProductDetailsBody(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: ProductDetailsBody(),
+      ),
     );
   }
 }

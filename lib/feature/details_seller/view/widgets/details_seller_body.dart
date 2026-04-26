@@ -19,33 +19,42 @@ class DetailsSellerBody extends StatelessWidget {
     ];
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Container(
       child: Column(
         children: [
-          SizedBox(height: h * 0.05),
           CustomAppBar(
+            onTap: () {
+              context.go('/nav');
+            },
             title: "FruitMarket",
             centerTitle: true,
             addIcons: false,
             icon2: Icons.search,
+            backIcon: true,
           ),
-          CustomDetailsSellerCart(h: h, w: w),
+          CustomDetailsSellerCart(h: h, w: w, orientation: orientation),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: h * 0.02),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  fontSize: h * 0.02,
+                  fontSize: orientation ? h * 0.02 : h * 0.03,
                   color: Colors.black,
                   title: "Category",
                 ),
-                CustomListCategory(h: h, items: items),
+                CustomListCategory(
+                  h: h,
+                  items: items,
+                  orientation: orientation,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      fontSize: h * 0.021,
+                      fontSize: orientation ? h * 0.02 : h * 0.03,
                       color: Colors.black,
                       title: "Products",
                     ),
@@ -53,19 +62,39 @@ class DetailsSellerBody extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: h * 0.5,
-                  child: ListView.builder(
-                    itemCount: 3,
-                    padding: EdgeInsets.only(top: 8),
-                    itemBuilder: (context, count) {
-                      return GestureDetector(
-                        onTap: () {
-                          context.go('/product');
-                        },
-                        child: CustomProductCart(h: h, w: w,title: "",),
-                      );
-                    },
-                  ),
+                  height: orientation ? h * 0.5 : h * 0.25,
+                  child: orientation
+                      ? ListView.builder(
+                          itemCount: 3,
+                          padding: EdgeInsets.only(top: 8),
+                          itemBuilder: (context, count) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.go('/product');
+                              },
+                              child: CustomProductCart(h: h, w: w, title: ""),
+                            );
+                          },
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(top: h * 0.02),
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 2,
+                                  crossAxisSpacing: 2,
+                                  childAspectRatio: 6,
+                                ),
+                            itemCount: 4,
+                            itemBuilder: (context, count) => GestureDetector(
+                              onTap: () {
+                                context.go('/product');
+                              },
+                              child: CustomProductCart(h: h, w: w, title: ""),
+                            ),
+                          ),
+                        ),
                 ),
               ],
             ),

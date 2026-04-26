@@ -12,12 +12,14 @@ class CustomOrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
           SizedBox(height: h * 0.02),
           CustomText(
-            fontSize: h * 0.02,
+            fontSize:orientation? h * 0.02:h*0.03,
             color: ColorApp.black,
             title: "Order Details",
           ),
@@ -26,14 +28,14 @@ class CustomOrderDetails extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomText(
-                  fontSize: h * 0.015,
+                  fontSize:orientation? h * 0.015:h*0.025,
                   color: ColorApp.gray,
                   title: "Total Items",
                   fontFamily: false,
                 ),
               ),
               CustomText(
-                fontSize: h * 0.015,
+                fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
                 title: "4 Items in cart",
               ),
@@ -45,14 +47,14 @@ class CustomOrderDetails extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomText(
-                  fontSize: h * 0.015,
+                  fontSize: orientation ? h * 0.015 : h * 0.025,
                   color: ColorApp.gray,
                   title: "Subtotal",
                   fontFamily: false,
                 ),
               ),
               CustomText(
-                fontSize: h * 0.015,
+                fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
                 title: "36.00 KD",
               ),
@@ -63,14 +65,14 @@ class CustomOrderDetails extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomText(
-                  fontSize: h * 0.015,
+                  fontSize: orientation ? h * 0.015 : h * 0.025,
                   color: ColorApp.gray,
                   title: "Shipping Charges",
                   fontFamily: false,
                 ),
               ),
               CustomText(
-                fontSize: h * 0.015,
+                fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
                 title: "1.50 KD",
               ),
@@ -82,13 +84,13 @@ class CustomOrderDetails extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomText(
-                  fontSize: h * 0.015,
+                  fontSize: orientation ? h * 0.015 : h * 0.025,
                   color: ColorApp.green,
                   title: "Bag Total",
                 ),
               ),
               CustomText(
-                fontSize: h * 0.015,
+                fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
                 title: "37.50 KD",
               ),

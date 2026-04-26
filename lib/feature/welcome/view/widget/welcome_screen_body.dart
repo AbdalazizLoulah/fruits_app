@@ -31,7 +31,7 @@ class WelcomeScreenBody extends StatelessWidget {
               icon: Icons.phone,
               width: h * 0.4,
               colorText: Colors.black,
-              title: "Sign in with Phone Number".tr(),
+              title: "signInWithPhone".tr(),
               heightBottom: h * 0.06,
               heightText: h * 0.015,
               colorBottom: Colors.white,
@@ -41,7 +41,7 @@ class WelcomeScreenBody extends StatelessWidget {
               addIcon: true,
               width: h * 0.4,
               colorText: Colors.black,
-              title: "Sign in with Google".tr(),
+              title: "signInWithGoogle".tr(),
               heightBottom: h * 0.06,
               heightText: h * 0.015,
               colorBottom: Colors.white,
@@ -51,7 +51,7 @@ class WelcomeScreenBody extends StatelessWidget {
               icon: Icons.facebook_sharp,
               width: h * 0.4,
               colorText: Colors.white,
-              title: "Sign in with FaceBook".tr(),
+              title: "signInWithFacebook".tr(),
               heightBottom: h * 0.06,
               heightText: h * 0.015,
               colorBottom: ColorApp.blue,
@@ -62,19 +62,19 @@ class WelcomeScreenBody extends StatelessWidget {
               onTap: () {
                 context.go('/logIn');
               },
-              title: 'Already member? '.tr(),
-              link: 'Sign In'.tr(),
+              title: 'alreadyMember '.tr(),
+              link: 'signIn'.tr(),
             ),
             SizedBox(height: h * 0.07),
             // Terms & Privacy
             Center(
               child: Text.rich(
                 TextSpan(
-                  text: 'By continue you agree to our '.tr(),
+                  text: 'termsAndPrivacy'.tr(),
                   style: TextStyle(color: Colors.grey, fontSize: h * 0.02),
                   children: [
                     TextSpan(
-                      text: 'Terms of service'.tr(),
+                      text: 'terms'.tr(),
                       style: const TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
@@ -83,7 +83,7 @@ class WelcomeScreenBody extends StatelessWidget {
                     ),
                     const TextSpan(text: ' and our '),
                     TextSpan(
-                      text: 'Privacy Policy'.tr(),
+                      text: 'privacy'.tr(),
                       style: const TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {

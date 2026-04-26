@@ -22,7 +22,7 @@ class SkipBottom extends StatelessWidget {
                 CustomText(
                   fontSize: h * 0.022,
                   color: ColorApp.gray,
-                  title: "skip".tr(),
+                  title: "Skip".tr(),
                 ),
                 Divider(),
               ],

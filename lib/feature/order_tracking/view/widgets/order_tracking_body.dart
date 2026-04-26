@@ -15,11 +15,17 @@ class OrderTrackingBody extends StatelessWidget {
     TextEditingController controller = TextEditingController();
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: h * 0.05),
-          CustomAppBar(title: "OrderTracking", centerTitle: true,onTap: ()=>context.go('/nav'),),
+          CustomAppBar(
+            title: "OrderTracking",
+            centerTitle: true,
+            onTap: () => context.go('/nav', extra: 1),
+            backIcon: true,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: h * 0.02),
             child: Column(
@@ -28,7 +34,7 @@ class OrderTrackingBody extends StatelessWidget {
                 SizedBox(height: h * 0.01),
                 Center(
                   child: CustomText(
-                    fontSize: h * 0.017,
+                    fontSize:orientation?h * 0.017:h*0.03,
                     color: ColorApp.gray,
                     title: "Your Order Code: #882610",
                     fontFamily: false,
@@ -36,7 +42,7 @@ class OrderTrackingBody extends StatelessWidget {
                 ),
                 Center(
                   child: CustomText(
-                    fontSize: h * 0.017,
+                    fontSize: orientation ? h * 0.017 : h * 0.03,
                     color: ColorApp.gray,
                     title: "3 items - 37.50 KD",
                     fontFamily: false,
@@ -44,7 +50,7 @@ class OrderTrackingBody extends StatelessWidget {
                 ),
                 Center(
                   child: CustomText(
-                    fontSize: h * 0.017,
+                    fontSize:orientation?h * 0.017:h*0.03,
                     color: ColorApp.gray,
                     title: "Payment Method : Cash",
                     fontFamily: false,
@@ -67,7 +73,7 @@ class OrderTrackingBody extends StatelessWidget {
                   title: "Out for delivery",
                   des: "Estimated for 10 September, 2021  ",
                 ),
-      
+
                 CustomDoteWay(
                   h: h,
                   w: w,
@@ -99,7 +105,7 @@ class OrderTrackingBody extends StatelessWidget {
             width: w * 0.8,
             title: "Confirm",
             heightBottom: h * 0.07,
-            heightText: h * 0.02,
+            heightText: orientation ? h * 0.02 : h * 0.03,
             colorBottom: ColorApp.green,
             colorText: Colors.white,
           ),
@@ -108,16 +114,18 @@ class OrderTrackingBody extends StatelessWidget {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (context) => CustomAlertCancelOrder(h: h, controller: controller, w: w),
+                builder: (context) =>
+                    CustomAlertCancelOrder(h: h, controller: controller, w: w),
               );
             },
             width: w * 0.8,
             title: "Cancel Order",
             heightBottom: h * 0.07,
-            heightText: h * 0.02,
+            heightText:orientation? h * 0.02:h*0.03,
             colorBottom: Colors.redAccent,
             colorText: Colors.white,
           ),
+          SizedBox(height: h*0.04,)
         ],
       ),
     );

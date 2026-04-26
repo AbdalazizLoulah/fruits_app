@@ -12,9 +12,11 @@ class DeliveryAddress extends StatefulWidget {
 }
 
 class _DeliveryAddressState extends State<DeliveryAddress> {
+  
   bool isSelect = false;
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation ==Orientation.portrait;
     var h = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: h * 0.02),
@@ -28,6 +30,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           ),
           SizedBox(height: h * 0.01),
           CustomCheckBottom(
+            orientation: orientation,
             heightContainer: h * 0.08,
             colorText: ColorApp.black,
             h: h,

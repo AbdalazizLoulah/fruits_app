@@ -1,4 +1,4 @@
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/checkout/view/widgets/custom_dote_check_out.dart';
@@ -8,25 +8,27 @@ class CustomSteeperOrder extends StatelessWidget {
     super.key,
     required this.h,
     this.done = true,
-    required this.currentStep,
+    required this.currentStep, this.orientation=false,
   });
   final int currentStep;
   final double h;
   final bool done;
+  final bool orientation;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding:  EdgeInsets.only(left: h*0.06),
+          padding:orientation? EdgeInsets.symmetric(horizontal: h * 0.05): EdgeInsets.symmetric(horizontal: h * 0.5),
           child: SizedBox(
-            height: h*0.05,
+            height: h * 0.05,
             child: ListView.builder(
               itemCount: 3,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, count) {
                 return CustomDoteCheckOut(
+                  orientation: orientation,
                   count: count,
                   h: h,
                   addWay: true,
@@ -37,28 +39,31 @@ class CustomSteeperOrder extends StatelessWidget {
           ),
         ),
         SizedBox(height: h * 0.01),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CustomText(
-              fontSize: h * 0.017,
-              color: currentStep == 0 ? Colors.green : Colors.grey,
-              title: "Delivery Time",
-              fontFamily: false,
-            ),
-            CustomText(
-              fontSize: h * 0.017,
-              color: currentStep == 1 ? Colors.green : Colors.grey,
-              title: "Delivery Address",
-              fontFamily: false,
-            ),
-            CustomText(
-              fontSize: h * 0.017,
-              color: currentStep == 2 ? Colors.green : Colors.grey,
-              title: "Payment",
-              fontFamily: false,
-            ),
-          ],
+        Padding(
+          padding:orientation? EdgeInsets.symmetric(horizontal: h * 0.01): EdgeInsets.symmetric(horizontal: h * 0.3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomText(
+                fontSize: orientation ?  h * 0.017:h * 0.03 ,
+                color: currentStep == 0 ? Colors.green : Colors.grey,
+                title: "Delivery Time",
+                fontFamily: false,
+              ),
+              CustomText(
+                fontSize: orientation ? h * 0.017 : h * 0.03,
+                color: currentStep == 1 ? Colors.green : Colors.grey,
+                title: "Delivery Address",
+                fontFamily: false,
+              ),
+              CustomText(
+                fontSize: orientation ? h * 0.017 : h * 0.03,
+                color: currentStep == 2 ? Colors.green : Colors.grey,
+                title: "Payment",
+                fontFamily: false,
+              ),
+            ],
+          ),
         ),
         Divider(),
       ],

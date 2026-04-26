@@ -4,9 +4,10 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
 class CustomDetailsSellerCart extends StatelessWidget {
-  const CustomDetailsSellerCart({super.key, required this.h, required this.w});
+  const CustomDetailsSellerCart({super.key, required this.h, required this.w,  this.orientation=false});
   final double h;
   final double w;
+  final bool orientation;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +17,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: h * 0.01),
             child: Container(
-              height: h * 0.14,
+              height:orientation? h * 0.14:h*0.2,
               width: double.infinity,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -46,6 +47,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: h * 0.02, left: w * 0.02),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -54,7 +56,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                               child: Row(
                                 children: [
                                   CustomText(
-                                    fontSize: h * 0.02,
+                                    fontSize:orientation? h * 0.02:h*0.03,
                                     color: Colors.black,
                                     title: "Seller name",
                                   ),
@@ -68,23 +70,23 @@ class CustomDetailsSellerCart extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: h * 0.01),
+                      
                         Row(
                           children: [
                             CustomText(
-                              fontSize: h * 0.013,
+                              fontSize: orientation ? h * 0.012 : h * 0.02,
                               color: ColorApp.gray,
                               title: " Delivery :40 to 60 Min",
                             ),
                           ],
                         ),
-                        SizedBox(height: h * 0.01),
+                        
                         Row(
                           children: [
                             SvgPicture.asset("assets/image/point.svg"),
                             SizedBox(width: w * 0.01),
                             CustomText(
-                              fontSize: h * 0.02,
+                              fontSize: orientation ? h * 0.02 : h * 0.022,
                               color: ColorApp.green,
                               title: "open",
                             ),
@@ -92,7 +94,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                             SvgPicture.asset("assets/image/point.svg"),
                             SizedBox(width: w * 0.02),
                             CustomText(
-                              fontSize: h * 0.020,
+                              fontSize: orientation ? h * 0.02 : h * 0.022,
                               color: ColorApp.gray,
                               title: "4,5",
                               fontFamily: false,

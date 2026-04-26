@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.h, required this.image, required this.title});
+  const CategoryItem({
+    super.key,
+    required this.h,
+    required this.image,
+    required this.title, this.orientation=false,
+  });
   final double h;
   final String image;
   final String title;
+  final bool orientation;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: h * 0.01, vertical: h * 0.01),
+      padding: EdgeInsets.symmetric(horizontal:orientation? h * 0.01:h*0.2, vertical: h * 0.01),
       child: Column(
         children: [
           Container(
@@ -31,7 +37,7 @@ class CategoryItem extends StatelessWidget {
               child: Image.asset(image, fit: BoxFit.fill),
             ),
           ),
-          CustomText(fontSize: h * 0.016, color: Colors.black, title: title)
+          CustomText(fontSize:orientation? h * 0.016:h*0.022, color: Colors.black, title: title),
         ],
       ),
     );

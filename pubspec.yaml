@@ -28,17 +28,29 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc: ^9.2.0
   carousel_slider: ^5.1.2
+  cloud_firestore: ^6.1.2
   cool_stepper_reloaded: ^3.2.6
   cupertino_icons: ^1.0.8
+  dartz: ^0.10.1
+  dio: ^5.9.2
+  dotted_line: ^3.2.3
   easy_localization: ^3.0.8
+  firebase_auth: ^6.1.4
+  firebase_core: ^4.4.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_facebook_auth: ^7.1.5
+  flutter_secure_storage: ^10.0.0
   flutter_svg: ^2.2.3
   font_awesome_flutter: ^10.12.0
   go_router: ^17.0.1
+  google_sign_in: ^7.2.0
   intl_phone_field: ^3.2.0
   pinput: ^6.0.1
+  skeletonizer: ^2.1.3
   smooth_page_indicator: ^2.0.1
   timeline_tile: ^2.0.0
 

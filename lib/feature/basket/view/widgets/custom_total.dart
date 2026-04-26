@@ -16,20 +16,22 @@ class CustomTotal extends StatelessWidget {
   final Color colorTitle;
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CustomText(fontSize: h * 0.016, color: colorTitle, title: title),
+        CustomText(fontSize:orientation? h * 0.016:h*0.03, color: colorTitle, title: title),
         Container(
           child: Row(
             children: [
               CustomText(
-                fontSize: h * 0.017,
+                fontSize:orientation? h * 0.017:h*0.03,
                 color: colorTitle,
                 title: price,
               ),
               CustomText(
-                fontSize: h * 0.013,
+                fontSize:orientation? h * 0.013:h*0.017,
                 color: ColorApp.gray,
                 title: "KD",
               ),

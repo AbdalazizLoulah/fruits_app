@@ -6,9 +6,11 @@ class ContactUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: ContactUsBody(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: ContactUsBody(),
+      ),
     );
   }
 }

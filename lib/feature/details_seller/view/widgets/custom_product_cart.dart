@@ -28,6 +28,8 @@ class _CustomProductCartState extends State<CustomProductCart> {
   int counter = 1;
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.h * 0.01),
       child: Column(
@@ -35,8 +37,8 @@ class _CustomProductCartState extends State<CustomProductCart> {
           Padding(
             padding: EdgeInsets.only(bottom: widget.h * 0.01),
             child: Container(
-              height: widget.h * 0.14,
-              width: double.infinity,
+              height:orientation? widget.h * 0.14:widget.h*0.16,
+              width:orientation? double.infinity:widget. w*2,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -62,7 +64,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
                       child: Image.asset("assets/image/Fruits.png"),
                     ),
                   ),
-                  SizedBox(width: widget.w * 0.03),
+                  
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(top: widget.h * 0.02),
@@ -75,7 +77,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                 child: Row(
                                   children: [
                                     CustomText(
-                                      fontSize: widget.h * 0.016,
+                                      fontSize:orientation? widget.h * 0.02 :widget. h*0.03,
                                       color: Colors.black,
                                       title: "Product name",
                                     ),
@@ -88,7 +90,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
                           Row(
                             children: [
                               CustomText(
-                                fontSize: widget.h * 0.013,
+                                fontSize:orientation? widget.h * 0.017:widget.h*0.02,
                                 color: ColorApp.gray,
                                 title: " 12.00KD",
                               ),
@@ -97,7 +99,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
                           SizedBox(height: widget.h * 0.01),
                           widget.title.isEmpty
                               ? Container(
-                                  height: widget.h * 0.03,
+                                  height:orientation? widget.h * 0.03:widget.h*0.045,
                                   width: widget.w * 0.3,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
@@ -110,7 +112,9 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                   ),
                                   child: Center(
                                     child: CustomText(
-                                      fontSize: widget.h * 0.013,
+                                      fontSize: orientation
+                                          ? widget.h * 0.016
+                                          : widget.h * 0.02,
                                       color: Colors.white,
                                       title: " Up to 10% Off",
                                     ),
@@ -125,78 +129,97 @@ class _CustomProductCartState extends State<CustomProductCart> {
                       ),
                     ),
                   ),
-                  SizedBox(width: widget.w * 0.04),
                   widget.add == false
                       ? Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                left: widget.h * 0.09,
-                                bottom: widget.h * 0.06,
-                                right: widget.h * 0.01,
+                                left:widget.addBottom==true?0 :widget.h * 0.02,
+                                 bottom: widget.h * 0.03,
+                                right:orientation? widget.h * 0.09:widget.h*0.0,
+                                top: widget.h * 0.02,
                               ),
-                              child: Icon(widget.icon, size: widget.h * 0.037),
+                              child: Container(
+                                decoration:widget.addBottom==true? BoxDecoration(
+                                ):BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorApp.openGray,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          150,
+                                        ),
+                                      ),
+                                child: Icon(widget.icon, size:orientation? widget.h * 0.03:widget.h*0.04),
+                              ),
                             ),
                             widget.addBottom == true
-                                ? Padding(
-                                    padding: EdgeInsets.only(
-                                      right: widget.h * 0.01,
-                                    ),
-                                    child: Container(
-                                      height: widget.h * 0.035,
-                                      width: widget.h * 0.133,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(
-                                              0.2,
-                                            ),
-                                            blurRadius: 10,
-                                            spreadRadius: 2,
-                                            offset: Offset(
-                                              0,
-                                              4,
-                                            ), // shadow position
-                                          ),
-                                        ],
+                                ? Expanded(
+                                  child: Padding(
+                                      padding: EdgeInsets.only(
+                                        right: widget.h * 0.01,
+                                        bottom: widget.h * 0.025,
+                                        left:  widget.h * 0.01,
                                       ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  counter++;
-                                                });
-                                              },
-                                              child: Icon(Icons.add),
-                                            ),
-                                            Text(
-                                              counter.toString(),
-                                              style: TextStyle(
-                                                fontSize: widget.h * 0.02,
+                                      child: Container(
+                                        height: widget.h * 0.035,
+                                        width: widget.h * 0.133,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withOpacity(
+                                                0.2,
                                               ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  if (counter > 1) {
-                                                    counter--;
-                                                  }
-                                                });
-                                              },
-                                              child: Icon(Icons.remove),
+                                              blurRadius: 10,
+                                              spreadRadius: 2,
+                                              offset: Offset(
+                                                0,
+                                                4,
+                                              ), // shadow position
                                             ),
                                           ],
                                         ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    counter++;
+                                                  });
+                                                },
+                                                child: Icon(Icons.add,size:orientation? widget.h*0.02:widget.h*0.04 ,),
+                                              ),
+                                              Text(
+                                                counter.toString(),
+                                                style: TextStyle(
+                                                  fontSize: widget.h * 0.02,
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (counter > 1) {
+                                                      counter--;
+                                                    }
+                                                  });
+                                                },
+                                                child: Icon(Icons.remove,
+                                                  size: orientation
+                                                      ? widget.h * 0.02
+                                                      : widget.h * 0.04,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  )
+                                )
                                 : SizedBox(),
                           ],
                         )

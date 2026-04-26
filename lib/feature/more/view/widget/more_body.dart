@@ -22,111 +22,139 @@ class _MoreBodyState extends State<MoreBody> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return SafeArea(
       child: Container(
-        child: Column(
-          children: [
-            CustomAppBar(title: "Fruit Market", centerTitle: true),
-            SizedBox(height: h * 0.03),
-            Container(
-              height: h * 0.1,
-              width: w * 0.23,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(70),
-                border: Border.all(color: ColorApp.gray),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.person_2_outlined,
-                  size: h * 0.06,
-                  color: ColorApp.gray,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomAppBar(title: "Fruit Market", centerTitle: true),
+              SizedBox(height: h * 0.03),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: h * 0.02),
+                child: Column(
+                  children: [
+                    Container(
+                      height: h * 0.1,
+                      width: orientation ? w * 0.23 : w * 0.05,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(70),
+                        border: Border.all(color: ColorApp.gray),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.person_2_outlined,
+                          size: h * 0.06,
+                          color: ColorApp.gray,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: h * 0.01),
+                    CustomText(
+                      fontSize: orientation ? h * 0.025 : h * 0.05,
+                      color: ColorApp.black,
+                      title: "Welcome, Fruit Market",
+                      fontFamily: false,
+                    ),
+                    SizedBox(height: h * 0.02),
+                    CustomBottom(
+                      width: w * 0.8,
+                      title: "LogIn",
+                      heightBottom: h * 0.056,
+                      heightText: h * 0.02,
+                      colorBottom: ColorApp.green,
+                      colorText: Colors.white,
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      orientation: orientation,
+                      onTap: () {
+                        context.go('/profile');
+                      },
+                      h: h,
+                      w: w,
+                      icon: Icons.person_3_outlined,
+                      title: "Profile",
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      orientation: orientation,
+                      onTap: () {
+                        context.push('/nav', extra: 1);
+                      },
+                      h: h,
+                      w: w,
+                      icon: Icons.menu_open,
+                      title: "MyOrders",
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      orientation: orientation,
+                      onTap: () {
+                        context.push('/nav', extra: 3);
+                      },
+                      h: h,
+                      w: w,
+                      icon: Icons.favorite_border,
+                      title: "favorite",
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      orientation: orientation,
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              CustomDialogLanguage(h: h, w: w),
+                        );
+                      },
+                      h: h,
+                      w: w,
+                      icon: Icons.language,
+                      title: "language",
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      orientation: orientation,
+                      onTap: () {
+                        context.go('/contact');
+                      },
+                      h: h,
+                      w: w,
+                      icon: Icons.headphones_rounded,
+                      title: "Support",
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      orientation: orientation,
+                      onTap: () {
+                        context.go('/team');
+                      },
+                      h: h,
+                      w: w,
+                      icon: Icons.handshake,
+                      title: "Terms & Conditions",
+                    ),
+                    SizedBox(height: h * 0.04),
+                    CustomCategoryProfile(
+                      onTap: () {
+                        context.go("/aboutUs");
+                      },
+                      orientation: orientation,
+                      h: h,
+                      w: w,
+                      icon: Icons.info_outline,
+                      title: "About Us",
+                    ),
+                    SizedBox(height: h * 0.05),
+                  ],
                 ),
               ),
-            ),
-            SizedBox(height: h * 0.01),
-            CustomText(
-              fontSize: h * 0.025,
-              color: ColorApp.black,
-              title: "Welcome, Fruit Market",
-              fontFamily: false,
-            ),
-            SizedBox(height: h * 0.02),
-            CustomBottom(
-              width: w * 0.8,
-              title: "LogIn",
-              heightBottom: h * 0.056,
-              heightText: h * 0.02,
-              colorBottom: ColorApp.green,
-              colorText: Colors.white,
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              onTap: () {
-                context.go('/profile');
-              },
-              h: h,
-              w: w,
-              icon: Icons.person_3_outlined,
-              title: "Profile",
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              h: h,
-              w: w,
-              icon: Icons.menu_open,
-              title: "MyOrders",
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              h: h,
-              w: w,
-              icon: Icons.favorite_border,
-              title: "favorite",
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => CustomDialogLanguage(h: h, w: w),
-                );
-              },
-              h: h,
-              w: w,
-              icon: Icons.language,
-              title: "language",
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              onTap: () {
-                context.go('/contact');
-              },
-              h: h,
-              w: w,
-              icon: Icons.headphones_rounded,
-              title: "Support",
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              onTap: () {
-                context.go('/team');
-              },
-              h: h,
-              w: w,
-              icon: Icons.handshake,
-              title: "Terms & Conditions",
-            ),
-            SizedBox(height: h * 0.04),
-            CustomCategoryProfile(
-              h: h,
-              w: w,
-              icon: Icons.info_outline,
-              title: "About Us",
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
-

@@ -31,12 +31,12 @@ class _CheckOutBodyState extends State<CheckOutBody> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
+    final orientation = MediaQuery.of(context).orientation ==Orientation.portrait;
     return Column(
       children: [
-        SizedBox(height: h * 0.05),
-        CustomAppBar(title: "Check Out", centerTitle: true,onTap: ()=>context.go('/nav'),),
+        CustomAppBar(title: "Check Out", centerTitle: true,onTap: ()=>context.go('/nav',extra:2 ),backIcon: true,),
         SizedBox(height: h * 0.02),
-        CustomSteeperOrder(h: h, currentStep: currentStep),
+        CustomSteeperOrder(h: h, currentStep: currentStep,orientation: orientation,),
         Expanded(
           child: PageView(
             controller: control,
@@ -53,8 +53,8 @@ class _CheckOutBodyState extends State<CheckOutBody> {
           },
           width: h * 0.36,
           title: currentStep == 2 ? "Place Order" : "Continue",
-          heightBottom: h * 0.06,
-          heightText: h * 0.02,
+          heightBottom:orientation? h * 0.06: h * 0.09,
+          heightText: orientation ? h * 0.015 : h * 0.04,
           colorBottom: ColorApp.green,
           colorText: Colors.white,
         ),

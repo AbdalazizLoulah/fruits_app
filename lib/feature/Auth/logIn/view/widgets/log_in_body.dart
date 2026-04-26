@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_link_page.dart';
@@ -6,6 +10,7 @@ import 'package:fruits_app/core/widget/custom_name_app.dart';
 import 'package:fruits_app/core/widget/custom_phone_text_field.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/core/widget/custom_text_form_field.dart';
+import 'package:fruits_app/feature/Auth/logIn/view_model/sign_in/cubit/sign_in_cubit.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -21,6 +26,12 @@ class _LogInBodyState extends State<LogInBody> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   @override
+  
+  Future saveToken({required String token}) async {
+    final storage = FlutterSecureStorage();
+    await storage.write(key: 'token', value: token);
+  }
+
   void dispose() {
     phoneController.dispose();
     passwordController.dispose();
@@ -96,18 +107,93 @@ class _LogInBodyState extends State<LogInBody> {
                   ],
                 ),
                 SizedBox(height: h * 0.03),
-                CustomBottom(
-                  onTap: () {
-                    if (key.currentState!.validate()) {
-                      context.go('/nav');
+                BlocConsumer<SignInCubit, SignInState>(
+                  listener: (context, state) {
+                    if (state is SignInFailure) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Error"),
+                          icon: Icon(Icons.error),
+                          content: Container(
+                            height: h * 0.05,
+                            width: h * 0.05,
+                            child: Column(
+                              children: [
+                                Text(
+                                  state.massage,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    if (state is SignInSuccess) {
+                      var d = state.data;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          onVisible: () {
+                            if (d.status == false) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text("Error"),
+                                  icon: Icon(Icons.error),
+                                  content: Container(
+                                    height: h * 0.05,
+                                    width: h * 0.05,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          d.message.toString(),
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              saveToken(token: "${d.data!.token}");
+                              
+                              context.go('/nav', extra: 0);
+                            }
+                          },
+                          content: d.status
+                              ? Text('Success')
+                              : Text('${d.message}'),
+                          backgroundColor: d.status ? Colors.green : Colors.red,
+                          duration: Duration(seconds: 3),
+                        ),
+                      );
                     }
                   },
-                  width: double.infinity,
-                  title: " Login ",
-                  heightBottom: h * 0.06,
-                  heightText: h * 0.02,
-                  colorBottom: ColorApp.green,
-                  colorText: Colors.white,
+                  builder: (context, state) {
+                    if (state is SignInLoading) {
+                      return Container(
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    return CustomBottom(
+                      onTap: () {
+                        if (key.currentState!.validate()) {
+                          context.read<SignInCubit>().logIn(
+                            phone: phoneController.text,
+                            password: passwordController.text,
+                          );
+                          // context.go('/nav', extra: 0);
+                        }
+                      },
+                      width: double.infinity,
+                      title: " Login ",
+                      heightBottom: h * 0.06,
+                      heightText: h * 0.02,
+                      colorBottom: ColorApp.green,
+                      colorText: Colors.white,
+                    );
+                  },
                 ),
                 SizedBox(height: h * 0.03),
                 CustomLinkPage(

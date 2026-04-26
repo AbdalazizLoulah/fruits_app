@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fruits_app/core/const/color_app.dart';
@@ -16,86 +17,87 @@ class ContactUsBody extends StatelessWidget {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return Container(
-      child: Column(
-        children: [
-          SizedBox(height: h * 0.05),
-          CustomAppBar(
-            title: "Contact Us",
-            centerTitle: true,
-            onTap: () => context.go('/nav'),
-          ),
-          SizedBox(height: h * 0.02),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: h * 0.03),
-            child: Column(
-              children: [
-                CustomTextFormField(
-                  h: h,
-                  fontSize: h * 0.015,
-                  helper: "Name",
-                  hint: "",
-                  controller: nameController,
-                ),
-                SizedBox(height: h * 0.02),
-                CustomTextFormField(
-                  h: h,
-                  fontSize: h * 0.015,
-                  helper: "Mobile",
-                  hint: "",
-                  controller: nameController,
-                ),
-                SizedBox(height: h * 0.02),
-                CustomTextFormField(
-                  maxLine: 5,
-                  h: h,
-                  fontSize: h * 0.015,
-                  helper: "message",
-                  hint: "",
-                  controller: nameController,
-                ),
-                SizedBox(height: h * 0.04),
-                CustomBottom(
-                  width: w,
-                  title: "Submit",
-                  heightBottom: h * 0.06,
-                  heightText: h * 0.02,
-                  colorBottom: ColorApp.green,
-                  colorText: Colors.white,
-                ),
-                SizedBox(height: h * 0.02),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomSocial(
-                      h: h,
-                      w: w,
-                      icon: FontAwesomeIcons.whatsapp,
-                      colorIcon: Colors.green,
-                    ),
-                    CustomSocial(
-                      h: h,
-                      w: w,
-                      icon: FontAwesomeIcons.facebook,
-                      colorIcon: Colors.lightBlue,
-                    ),
-                    CustomSocial(
-                      h: h,
-                      w: w,
-                      icon: FontAwesomeIcons.instagram,
-                      colorIcon: Colors.red,
-                    ),
-                    CustomSocial(
-                      h: h,
-                      w: w,
-                      icon: FontAwesomeIcons.youtube,
-                      colorIcon: Colors.red,
-                    ),
-                  ],
-                ),
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            CustomAppBar(
+              title: "Contact Us",
+              centerTitle: true,
+              onTap: () => context.go('/nav',extra: 4),backIcon: true
             ),
-          ),
-        ],
+            SizedBox(height: h * 0.02),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: h * 0.03),
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                    h: h,
+                    fontSize: h * 0.015,
+                    helper: "Name",
+                    hint: "",
+                    controller: nameController,
+                  ),
+                  SizedBox(height: h * 0.02),
+                  CustomTextFormField(
+                    h: h,
+                    fontSize: h * 0.015,
+                    helper: "Mobile",
+                    hint: "",
+                    controller: nameController,
+                  ),
+                  SizedBox(height: h * 0.02),
+                  CustomTextFormField(
+                    maxLine: 5,
+                    h: h,
+                    fontSize: h * 0.015,
+                    helper: "message",
+                    hint: "",
+                    controller: nameController,
+                  ),
+                  SizedBox(height: h * 0.04),
+                  CustomBottom(
+                    width: w,
+                    title: "Submit",
+                    heightBottom: h * 0.06,
+                    heightText: h * 0.02,
+                    colorBottom: ColorApp.green,
+                    colorText: Colors.white,
+                  ),
+                  SizedBox(height: h * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomSocial(
+                        h: h,
+                        w: w,
+                        icon: FontAwesomeIcons.whatsapp,
+                        colorIcon: Colors.green,
+                      ),
+                      CustomSocial(
+                        h: h,
+                        w: w,
+                        icon: FontAwesomeIcons.facebook,
+                        colorIcon: Colors.lightBlue,
+                      ),
+                      CustomSocial(
+                        h: h,
+                        w: w,
+                        icon: FontAwesomeIcons.instagram,
+                        colorIcon: Colors.red,
+                      ),
+                      CustomSocial(
+                        h: h,
+                        w: w,
+                        icon: FontAwesomeIcons.youtube,
+                        colorIcon: Colors.red,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

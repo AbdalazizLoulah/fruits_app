@@ -22,6 +22,8 @@ class CustomDoteWay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Row(
       children: [
         Column(
@@ -46,12 +48,12 @@ class CustomDoteWay extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                fontSize: h * 0.02,
+                fontSize:orientation? h * 0.02:h*0.025,
                 color: ColorApp.black,
                 title: title,
               ),
               CustomText(
-                fontSize: h * 0.018,
+                fontSize:orientation? h * 0.018:h*0.025,
                 color: ColorApp.gray,
                 title: des,
                 fontFamily: false,

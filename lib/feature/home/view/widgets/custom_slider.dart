@@ -14,12 +14,14 @@ class CustomSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Container(
       child: Column(
         children: [
           Container(
-            height: h*0.15,
-            width: h*0.5,
+            height:orientation? h*0.15:h*0.2,
+            width: double.infinity,
             child: PageView.builder(
               controller: _pageController,
               itemCount: 4,
@@ -31,8 +33,11 @@ class CustomSlider extends StatelessWidget {
                     width: h * 0.4,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: ColorApp.openBlue,
+                      
                     ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(15),
+                      child: Image.asset("assets/image/slider.png",fit: BoxFit.fill,)),
                   ),
                 );
               },

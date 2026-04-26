@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
-
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
     this.onTap,
     this.centerTitle = false,
     required this.title,
-    this.addIcons = false,this.icon1,this.icon2, this.onTap1, this.onTap2,
+    this.addIcons = false,
+    this.icon1,
+    this.icon2,
+    this.onTap1,
+    this.onTap2,
+    this.backIcon=false
   });
   final Function()? onTap;
   final Function()? onTap1;
@@ -19,6 +23,7 @@ class CustomAppBar extends StatelessWidget {
   final bool addIcons;
   final IconData? icon1;
   final IconData? icon2;
+  final bool? backIcon;
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -32,14 +37,17 @@ class CustomAppBar extends StatelessWidget {
                 height: h * 0.06,
                 child: Row(
                   children: [
-                    centerTitle ? GestureDetector(
-                      onTap: onTap,
-                      child: Icon(Icons.arrow_back_ios)) : SizedBox(),
+                    centerTitle
+                        ? GestureDetector(
+                            onTap: onTap,
+                            child:backIcon==false?SizedBox(): Icon(Icons.arrow_back_ios),
+                          )
+                        : SizedBox(),
                     Expanded(
                       child: centerTitle
                           ? Center(
                               child: CustomText(
-                                fontSize: h * 0.03,
+                                fontSize: h * 0.035,
                                 color: ColorApp.green,
                                 title: title,
                               ),
@@ -55,13 +63,21 @@ class CustomAppBar extends StatelessWidget {
                         : Container(
                             child: Row(
                               children: [
-                                icon1==null? SizedBox() :GestureDetector(
-                                  onTap: onTap1,
-                                  child: Icon(icon1, color: ColorApp.green)),
-                                SizedBox(width: h*0.01,),
+                                icon1 == null
+                                    ? SizedBox()
+                                    : GestureDetector(
+                                        onTap: onTap1,
+                                        child: Icon(
+                                          icon1,
+                                          color: ColorApp.green,
+                                        ),
+                                      ),
+                                SizedBox(width: h * 0.01),
                                 GestureDetector(
                                   onTap: onTap2,
-                                  child:icon2==null? SizedBox(): Icon(icon2, color: ColorApp.green),
+                                  child: icon2 == null
+                                      ? SizedBox()
+                                      : Icon(icon2, color: ColorApp.green),
                                 ),
                               ],
                             ),

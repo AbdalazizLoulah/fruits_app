@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_name_app.dart';
 import 'package:fruits_app/core/widget/custom_phone_text_field.dart';
+import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/Auth/forgetPassword/view_model/auth_phone/cubit/auth_phone_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 class ForgetPasswordBody extends StatelessWidget {
@@ -41,14 +44,57 @@ class ForgetPasswordBody extends StatelessWidget {
                 controller: controller,
               ),
               SizedBox(height: h * 0.04),
-              CustomBottom(
-                onTap: () => context.go('/otp'),
-                width: double.infinity,
-                title: "Submit",
-                heightBottom: h * 0.06,
-                heightText: h * 0.02,
-                colorBottom: ColorApp.green,
-                colorText: Colors.white,
+              BlocConsumer<AuthPhoneCubit, AuthPhoneState>(
+                builder: (context, state) {
+                  if (state is AuthPhoneLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return CustomBottom(
+                    onTap: () {
+                      context.read<AuthPhoneCubit>().submitPhoneNumber(
+                        controller.text,
+                      );
+                      context.go('/otp');
+                    },
+                    width: double.infinity,
+                    title: "Submit",
+                    heightBottom: h * 0.06,
+                    heightText: h * 0.02,
+                    colorBottom: ColorApp.green,
+                    colorText: Colors.white,
+                  );
+                },
+                listener: (context, state) {
+                  if (state is AuthPhoneFailure) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Align(
+                          child: CustomText(
+                            fontSize: h * 0.02,
+                            color: Colors.black,
+                            title: state.massage,
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  if (state is AuthPhoneSuccess) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Align(
+                          child: CustomText(
+                            fontSize: h * 0.02,
+                            color: Colors.black,
+                            title: "Success",
+                          ),
+                        );
+                      },
+                    );
+                    context.go('/otp');
+                  }
+                },
               ),
             ],
           ),

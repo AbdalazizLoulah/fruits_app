@@ -9,11 +9,13 @@ class CustomCircle extends StatelessWidget {
   final bool isSelect;
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: h * 0.03,
-        width: h * 0.03,
+        height:orientation? h * 0.03:h*0.04,
+        width: orientation ? h * 0.03 : h * 0.04,
         decoration: BoxDecoration(
           color:isSelect?ColorApp.green : Colors.white,
           border: Border.all(width: 2),

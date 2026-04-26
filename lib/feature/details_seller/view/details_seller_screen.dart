@@ -6,9 +6,11 @@ class DetailsSellerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: DetailsSellerBody(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: DetailsSellerBody(),
+      ),
     );
   }
 }

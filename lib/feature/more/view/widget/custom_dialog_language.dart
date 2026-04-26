@@ -41,9 +41,10 @@ class _CustomDialogLanguageState extends State<CustomDialogLanguage> {
       child: SizedBox(
         height: widget.h * 0.3,
         child: Padding(
-          padding: EdgeInsets.only(top: widget.h * 0.01),
+          padding: EdgeInsets.symmetric(horizontal:widget.h*0.02,vertical: widget.h * 0.02 ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               /// 🇸🇦 Arabic
               Row(
@@ -52,7 +53,7 @@ class _CustomDialogLanguageState extends State<CustomDialogLanguage> {
                     padding: const EdgeInsets.all(9.0),
                     child: CustomCircle(
                       h: widget.h * 0.5,
-                      isSelect: arabic, // 👈 مهم
+                      isSelect: arabic, 
                       onTap: () {
                         setState(() {
                           arabic = true;
@@ -63,6 +64,12 @@ class _CustomDialogLanguageState extends State<CustomDialogLanguage> {
                   ),
                   Image.asset("assets/image/ar.png", height: widget.h * 0.02),
                   CustomText(
+                    onTap: () {
+                      setState(() {
+                        arabic = true;
+                        english = false;
+                      });
+                    },
                     fontSize: widget.h * 0.02,
                     color: ColorApp.gray,
                     title: "العربية",
@@ -78,7 +85,7 @@ class _CustomDialogLanguageState extends State<CustomDialogLanguage> {
                     padding: const EdgeInsets.all(9.0),
                     child: CustomCircle(
                       h: widget.h * 0.5,
-                      isSelect: english, // 👈 مهم
+                      isSelect: english, 
                       onTap: () {
                         setState(() {
                           english = true;
@@ -89,6 +96,12 @@ class _CustomDialogLanguageState extends State<CustomDialogLanguage> {
                   ),
                   Image.asset("assets/image/en.png",height:widget.h*0.02,),
                   CustomText(
+                      onTap: () {
+                      setState(() {
+                        english = true;
+                        arabic = false;
+                      });
+                    },
                     fontSize: widget.h * 0.015,
                     color: ColorApp.gray,
                     title: "English",

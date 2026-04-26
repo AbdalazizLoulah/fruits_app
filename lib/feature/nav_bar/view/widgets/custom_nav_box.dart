@@ -6,6 +6,7 @@ class CustomNavBox extends StatelessWidget {
   final IconData icon;
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       decoration: BoxDecoration(

@@ -8,7 +8,8 @@ class CustomCategoryProfile extends StatelessWidget {
     required this.h,
     required this.w,
     required this.icon,
-    required this.title, this.onTap,
+    required this.title,
+    this.onTap,  this.orientation=false,
   });
 
   final double h;
@@ -16,23 +17,24 @@ class CustomCategoryProfile extends StatelessWidget {
   final IconData icon;
   final String title;
   final void Function()? onTap;
+  final bool orientation;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: h * 0.025),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: onTap,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Expanded(
               child: Container(
                 child: Row(
                   children: [
-                    Icon(icon, size: h * 0.03, color: ColorApp.green),
+                    Icon(icon, size:orientation?h*0.03:h*0.05, color: ColorApp.green),
                     SizedBox(width: w * 0.02),
                     CustomText(
-                      fontSize: h * 0.019,
+                      fontSize:orientation? h*0.019:h*0.03,
                       color: ColorApp.black,
                       title: title,
                       fontFamily: false,
@@ -41,9 +43,9 @@ class CustomCategoryProfile extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Icon(Icons.arrow_forward_ios, color: ColorApp.gray),
-        ],
+            Icon(Icons.arrow_forward_ios, color: ColorApp.gray,size: orientation?h*0.02:h*0.03,),
+          ],
+        ),
       ),
     );
   }

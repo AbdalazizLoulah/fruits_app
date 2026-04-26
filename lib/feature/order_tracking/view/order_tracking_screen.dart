@@ -6,6 +6,6 @@ class OrderTrackingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white, body: OrderTrackingBody());
+    return SafeArea(child: Scaffold(backgroundColor: Colors.white, body: OrderTrackingBody()));
   }
 }

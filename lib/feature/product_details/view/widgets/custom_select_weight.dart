@@ -10,7 +10,8 @@ class CustomSelectWeight extends StatelessWidget {
     required this.title,
     required this.icon,
     this.onTap,
-    required this.show, required this.itemCount,
+    required this.show,
+    required this.itemCount,  this.orientation=false,
   });
 
   final double h;
@@ -18,6 +19,7 @@ class CustomSelectWeight extends StatelessWidget {
   final IconData icon;
   final bool show;
   final int itemCount;
+  final bool orientation;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -27,16 +29,18 @@ class CustomSelectWeight extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(fontSize: h * 0.02, color: Colors.black, title: title),
+            CustomText(fontSize:orientation? h * 0.02:h*0.03, color: Colors.black, title: title),
             GestureDetector(
               onTap: onTap,
               child: show
-                  ? Icon(Icons.keyboard_arrow_down,
-                      size: h * 0.035,
-                      color: ColorApp.gray,)
+                  ? Icon(
+                      Icons.keyboard_arrow_down,
+                      size:orientation? h * 0.035:h*0.05,
+                      color: ColorApp.gray,
+                    )
                   : Icon(
                       Icons.keyboard_arrow_up,
-                      size: h * 0.035,
+                      size: orientation ? h * 0.035 : h * 0.05,
                       color: ColorApp.gray,
                     ),
             ),
@@ -53,9 +57,13 @@ class CustomSelectWeight extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(9.0),
-                          child: CustomCircle(h: h * 0.5),
+                          child: CustomCircle(h:orientation? h * 0.5:h*0.7),
                         ),
-                      CustomText(fontSize: h*0.015, color: ColorApp.gray, title: "50 Gram - 4.00 KD")
+                        CustomText(
+                          fontSize:orientation? h * 0.015:h*0.03,
+                          color: ColorApp.gray,
+                          title: "50 Gram - 4.00 KD",
+                        ),
                       ],
                     );
                   },

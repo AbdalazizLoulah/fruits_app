@@ -6,9 +6,11 @@ class CustomListCategory extends StatelessWidget {
     super.key,
     required this.h,
     required this.items,
+    this.orientation = false,
   });
 
   final double h;
+  final bool orientation;
   final List<Map<String, dynamic>> items;
 
   @override
@@ -20,7 +22,12 @@ class CustomListCategory extends StatelessWidget {
         itemCount: items.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, count) {
-          return CategoryItem(h: h, image: items[count]["image"],title: items[count]["title"],);
+          return CategoryItem(
+            h: h,
+            image: items[count]["image"],
+            title: items[count]["title"],
+            orientation: orientation,
+          );
         },
       ),
     );

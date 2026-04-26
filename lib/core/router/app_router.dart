@@ -1,13 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:fruits_app/feature/about_us/view/about_Screen.dart';
+import 'package:fruits_app/feature/nav_bar/view/widgets/custom_bottom_nav.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:fruits_app/core/service/auth_phone.dart';
 import 'package:fruits_app/feature/Auth/forgetPassword/view/forget_password.dart';
+import 'package:fruits_app/feature/Auth/forgetPassword/view_model/auth_phone/cubit/auth_phone_cubit.dart';
 import 'package:fruits_app/feature/Auth/logIn/view/log_in_screen.dart';
 import 'package:fruits_app/feature/Auth/otp/view/otp_screen.dart';
 import 'package:fruits_app/feature/Auth/signUp/view/sign_in_screen.dart';
-import 'package:fruits_app/feature/basket/view/widgets/basket_body.dart';
 import 'package:fruits_app/feature/checkout/view/check_out_screen.dart';
-import 'package:fruits_app/feature/checkout/view/widgets/check_out_body.dart';
 import 'package:fruits_app/feature/contact_us/view/contact_us_screen.dart';
 import 'package:fruits_app/feature/details_seller/view/details_seller_screen.dart';
-import 'package:fruits_app/feature/error_bage/view/chech_out_error.dart';
+import 'package:fruits_app/feature/error_screen/view/check_out_error.dart';
 import 'package:fruits_app/feature/home/view/home_screen.dart';
 import 'package:fruits_app/feature/nav_bar/view/navigate_screen.dart';
 import 'package:fruits_app/feature/on_board.dart/view/on_board_screen.dart';
@@ -15,10 +20,9 @@ import 'package:fruits_app/feature/order_tracking/view/order_tracking_screen.dar
 import 'package:fruits_app/feature/product_details/view/product_details_screen.dart';
 import 'package:fruits_app/feature/profile/view/profile_screen.dart';
 import 'package:fruits_app/feature/splash/view/splash_screen.dart';
-import 'package:fruits_app/feature/successbage/view/check_out_success.dart';
+import 'package:fruits_app/feature/success_screen/view/check_out_success.dart';
 import 'package:fruits_app/feature/team&condition/view/team_and_condition_screen.dart';
 import 'package:fruits_app/feature/welcome/view/welcome_screen.dart';
-import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final route = GoRouter(
@@ -31,14 +35,20 @@ class AppRouter {
         path: '/forgetPassword',
         builder: (context, state) => ForgetPassword(),
       ),
-      GoRoute(
-        path: '/signUp',
-        builder: (context, state) => SignInScreen(),
-      ),
+      GoRoute(path: '/signUp', builder: (context, state) => SignInScreen()),
       GoRoute(path: '/otp', builder: (context, state) => OtpScreen()),
-      GoRoute(path: '/nav', builder: (context, state) => NavigateScreen()),
+      GoRoute(
+        path: '/nav',
+        builder: (context, state) {
+          final index = state.extra as int? ?? 0;
+          return CustomBottomNav( currentIndex:index );
+        },
+      ),
       GoRoute(path: '/home', builder: (context, state) => HomeScreen()),
-      GoRoute(path: '/detailsSeller', builder: (context, state) => DetailsSellerScreen()),
+      GoRoute(
+        path: '/detailsSeller',
+        builder: (context, state) => DetailsSellerScreen(),
+      ),
       GoRoute(
         path: '/product',
         builder: (context, state) => ProductDetailsScreen(),
@@ -47,20 +57,24 @@ class AppRouter {
         path: '/team',
         builder: (context, state) => TeamAndConditionScreen(),
       ),
-      GoRoute(
-        path: '/contact',
-        builder: (context, state) => ContactUsScreen(),
-      ),
+      GoRoute(path: '/contact', builder: (context, state) => ContactUsScreen()),
       GoRoute(path: '/profile', builder: (context, state) => ProfileScreen()),
-      GoRoute(path: '/orderTracking', builder: (context, state) => OrderTrackingScreen()),
       GoRoute(
-        path: '/chickOut',
-        builder: (context, state) => CheckOutScreen(),
+        path: '/orderTracking',
+        builder: (context, state) => OrderTrackingScreen(),
       ),
-      GoRoute(path: '/chickOutSuccess', builder: (context, state) => CheckOutSuccess()),
+      GoRoute(path: '/chickOut', builder: (context, state) => CheckOutScreen()),
+      GoRoute(
+        path: '/chickOutSuccess',
+        builder: (context, state) => CheckOutSuccess(),
+      ),
       GoRoute(
         path: '/chickOutError',
         builder: (context, state) => CheckOutError(),
+      ),
+      GoRoute(
+        path: '/aboutUs',
+        builder: (context, state) =>AboutScreen(),
       ),
     ],
   );

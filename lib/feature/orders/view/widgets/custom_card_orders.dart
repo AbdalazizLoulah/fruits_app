@@ -4,19 +4,20 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
 class CustomCardOrders extends StatelessWidget {
-  const CustomCardOrders({
-    super.key,
-    required this.h,
-    required this.w,
-  });
+  const CustomCardOrders({super.key, required this.h, required this.w, this.orientation=false});
 
   final double h;
   final double w;
+  final bool orientation;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: h * 0.01,left:h*0.02,right: h * 0.02 ),
+      padding: EdgeInsets.only(
+        bottom: h * 0.01,
+        left: h * 0.02,
+        right: h * 0.02,
+      ),
       child: Container(
         height: h * 0.12,
         width: double.infinity,
@@ -35,7 +36,7 @@ class CustomCardOrders extends StatelessWidget {
         child: Row(
           children: [
             Padding(
-              padding: EdgeInsets.all(h*0.02),
+              padding: EdgeInsets.all(h * 0.02),
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(70),
                 child: Image.asset("assets/image/status.png"),
@@ -43,9 +44,10 @@ class CustomCardOrders extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(top: h * 0.02, ),
+                padding: EdgeInsets.only(top: h * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                
                   children: [
                     Row(
                       children: [
@@ -53,7 +55,7 @@ class CustomCardOrders extends StatelessWidget {
                           child: Row(
                             children: [
                               CustomText(
-                                fontSize: h * 0.02,
+                                fontSize:orientation? h * 0.03:h*0.02,
                                 color: Colors.black,
                                 title: "#243188 - 37 KD",
                               ),
@@ -66,29 +68,32 @@ class CustomCardOrders extends StatelessWidget {
                     Row(
                       children: [
                         CustomText(
-                          fontSize: h * 0.015,
+                          fontSize:orientation? h * 0.025: h * 0.015,
                           color: ColorApp.gray,
                           title: " 9 Seb",
                         ),
                         SizedBox(width: w * 0.01),
-                        SvgPicture.asset("assets/image/point.svg",height: h*0.01,),
-                          CustomText(
-                          fontSize: h * 0.015,
+                        SvgPicture.asset(
+                          "assets/image/point.svg",
+                          height: h * 0.01,
+                        ),
+                        CustomText(
+                          fontSize: orientation ? h * 0.025 : h * 0.015,
                           color: ColorApp.gray,
                           title: " 4 items",
                         ),
                       ],
                     ),
+                    SizedBox(height: h * 0.01),
                     Row(
                       children: [
-                        SizedBox(width: w * 0.01),
                         CustomText(
-                          fontSize: h * 0.015,
+                          fontSize: orientation ? h * 0.023 : h * 0.015,
                           color: ColorApp.gray,
                           title: "Status :",
                         ),
                         CustomText(
-                          fontSize: h * 0.013,
+                          fontSize: orientation ? h * 0.025 : h * 0.013,
                           color: const Color.fromARGB(255, 218, 198, 23),
                           title: "  Delivering",
                           fontFamily: false,

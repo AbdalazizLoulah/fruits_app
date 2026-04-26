@@ -15,15 +15,18 @@ class _DeliveryTimeState extends State<DeliveryTime> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: h * 0.02),
       child: Column(
         children: [
           SizedBox(height: h * 0.03),
           CustomCheckBottom(
+            orientation: orientation,
             h: h,
             colorText: ColorApp.black,
-            heightContainer: h * 0.07,
+            heightContainer:orientation? h * 0.07:h*0.09,
             title: "Now",
             onTap: () {
               setState(() {
@@ -36,9 +39,10 @@ class _DeliveryTimeState extends State<DeliveryTime> {
           ),
           SizedBox(height: h * 0.03),
           CustomCheckBottom(
+            orientation: orientation,
             h: h,
             colorText: ColorApp.black,
-            heightContainer: h * 0.17,
+            heightContainer:orientation? h * 0.18 : h * 0.27,
             title: "Select Delivery Time",
             add: true,
             onTap: () {

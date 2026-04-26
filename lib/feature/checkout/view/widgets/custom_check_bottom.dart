@@ -18,7 +18,7 @@ class CustomCheckBottom extends StatefulWidget {
     this.addIcon = false,
     this.icon,
     this.addImage = false,
-    this.image,
+    this.image,  this.orientation=false,
   });
 
   final double heightContainer;
@@ -32,6 +32,7 @@ class CustomCheckBottom extends StatefulWidget {
   final IconData? icon;
   final bool addImage;
   final String? image;
+  final bool orientation;
   @override
   State<CustomCheckBottom> createState() => _CustomCheckBottomState();
 }
@@ -81,12 +82,12 @@ class _CustomCheckBottomState extends State<CustomCheckBottom> {
             Row(
               children: [
                 widget.addImage
-                    ? SvgPicture.asset(widget.image.toString())
+                    ? SvgPicture.asset(widget.image.toString(),height: widget.orientation?widget. h*0.02:widget.h*0.04,)
                     : Text(""),
-                    
+
                 Expanded(
                   child: CustomText(
-                    fontSize: widget.h * 0.015,
+                    fontSize:widget.orientation? widget.h * 0.017: widget.h * 0.025,
                     color: widget.colorText,
                     title: widget.title,
                   ),
@@ -94,10 +95,10 @@ class _CustomCheckBottomState extends State<CustomCheckBottom> {
                 widget.addIcon
                     ? widget.icon == null
                           ? CustomBottom(
-                              width: widget.h * 0.06,
+                              width:widget.orientation? widget.h * 0.06:widget.h*0.2,
                               title: "Apply",
-                              heightBottom: widget.h * 0.03,
-                              heightText: widget.h * 0.012,
+                              heightBottom:widget.orientation? widget.h * 0.03:widget.h*0.05,
+                              heightText:widget.orientation? widget.h * 0.012:widget.h*0.017,
                               colorBottom: ColorApp.green,
                               colorText: Colors.white,
                             )
@@ -115,7 +116,9 @@ class _CustomCheckBottomState extends State<CustomCheckBottom> {
                     children: [
                       SizedBox(height: widget.h * 0.01),
                       CustomText(
-                        fontSize: widget.h * 0.015,
+                        fontSize: widget.orientation
+                            ? widget.h * 0.017
+                            : widget.h * 0.025,
                         color: ColorApp.gray,
                         title: "Select Date",
                       ),
@@ -133,12 +136,12 @@ class _CustomCheckBottomState extends State<CustomCheckBottom> {
                         onTap: () {
                           pickDate(context);
                         },
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           hintText: "SelectDate",
-                          hintStyle: TextStyle(color: Colors.green),
+                          hintStyle: TextStyle(color: Colors.green,fontSize:widget.orientation? widget.h * 0.016: widget.h * 0.03,),
                           suffixIcon: Icon(
                             Icons.keyboard_arrow_down_sharp,
-                            size: 30,
+                            size: widget.h * 0.05
                           ),
                         ),
                       ),

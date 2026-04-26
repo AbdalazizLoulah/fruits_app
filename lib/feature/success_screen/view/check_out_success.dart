@@ -11,13 +11,22 @@ class CheckOutSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
           SizedBox(height: h * 0.05),
-          CustomAppBar(title: "checkout_title".tr(), centerTitle: true),
+          CustomAppBar(
+            title: "checkout_title".tr(),
+            centerTitle: true,
+            backIcon: true,
+            onTap: () {
+              context.go('/chickOut');
+            },
+          ),
 
           Expanded(
             child: Container(
