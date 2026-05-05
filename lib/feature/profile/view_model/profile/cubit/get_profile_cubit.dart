@@ -16,9 +16,9 @@ class GetProfileCubit extends Cubit<GetProfileState> {
   Future<Either<Failure, UserResponse>> getProfile() async {
     emit(GetProfileLoading());
     try {
-      var res = await apiService.get(endPoint: "profile");
+      var res = await apiService.get(endPoint: "profile",);
       var data = UserResponse.fromJson(res);
-      log("data= $data");
+      
       emit(GetProfileSuccess(data: data));
       return right(data);
     } catch (e) {

@@ -1,5 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_app/core/service/api_service.dart';
 import 'package:fruits_app/feature/about_us/view/about_Screen.dart';
+import 'package:fruits_app/feature/details_seller/data/models/product_model.dart';
+import 'package:fruits_app/feature/home/data/model/vendor_model.dart';
+import 'package:fruits_app/feature/product_details/view_model/get_product_sells/cubit/get_product_sells_cubit.dart';
+import 'package:fruits_app/feature/home/view_model/sellers/cubit/get_seller_cubit.dart';
 import 'package:fruits_app/feature/nav_bar/view/widgets/custom_bottom_nav.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,17 +48,39 @@ class AppRouter {
         path: '/nav',
         builder: (context, state) {
           final index = state.extra as int? ?? 0;
-          return CustomBottomNav( currentIndex:index );
+          return BlocProvider(
+            create: (context) =>
+                GetSellerCubit(ApiService(dio: Dio()))..getSellers(),
+            child: CustomBottomNav(currentIndex: index),
+          );
         },
       ),
-      GoRoute(path: '/home', builder: (context, state) => HomeScreen()),
+      GoRoute(
+        path: '/home',
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              GetSellerCubit(ApiService(dio: Dio()))..getSellers(),
+          child: HomeScreen(),
+        ),
+      ),
       GoRoute(
         path: '/detailsSeller',
-        builder: (context, state) => DetailsSellerScreen(),
+        builder: (context, state) {
+          final index = state.extra as VendorModel;
+          return BlocProvider(
+            create: (context) =>
+                GetProductSellsCubit(ApiService(dio: Dio()))
+                  ..getProduct(id: index.id),
+            child: DetailsSellerScreen(id: index),
+          );
+        },
       ),
       GoRoute(
         path: '/product',
-        builder: (context, state) => ProductDetailsScreen(),
+        builder: (context, state) {
+          final data = state.extra as ProductModel;
+          return ProductDetailsScreen(data: data,);
+        },
       ),
       GoRoute(
         path: '/team',
@@ -72,10 +101,7 @@ class AppRouter {
         path: '/chickOutError',
         builder: (context, state) => CheckOutError(),
       ),
-      GoRoute(
-        path: '/aboutUs',
-        builder: (context, state) =>AboutScreen(),
-      ),
+      GoRoute(path: '/aboutUs', builder: (context, state) => AboutScreen()),
     ],
   );
 }

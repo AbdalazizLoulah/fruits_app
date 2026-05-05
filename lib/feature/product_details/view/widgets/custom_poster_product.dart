@@ -3,22 +3,23 @@ import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 
 class CustomPosterProduct extends StatelessWidget {
-  const CustomPosterProduct({
-    super.key,
-    required this.h,
-  });
+  const CustomPosterProduct({super.key, required this.h, required this.discound});
 
   final double h;
-
+  final int discound;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset("assets/image/fruitShop.png",height: h*0.3,width: double.infinity,),
+        Image.asset(
+          "assets/image/fruitShop.png",
+          height: h * 0.3,
+          width: double.infinity,
+        ),
         Positioned(
           top: h * 0.02,
           left: h * 0.32,
-          child: Container(
+          child:discound==0?SizedBox(): Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Colors.white,

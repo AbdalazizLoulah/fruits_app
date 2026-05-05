@@ -11,7 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     this.validator,
     this.obscureText = false,
-    required this.h, this.maxLine=1,
+    required this.h, this.maxLine=1, this.type,
   });
   final double fontSize;
   final String helper;
@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final int maxLine;
+  final TextInputType? type;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
         CustomText(fontSize: fontSize, color: ColorApp.openGray, title: helper),
         SizedBox(height: h * 0.01),
         TextFormField(
+          keyboardType:type ,
           maxLines: maxLine,
           obscureText: obscureText,
           validator: validator,

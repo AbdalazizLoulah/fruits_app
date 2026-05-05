@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/details_seller/data/models/product_model.dart';
 
 class CustomProductCart extends StatefulWidget {
   const CustomProductCart({
@@ -11,6 +12,7 @@ class CustomProductCart extends StatefulWidget {
     this.addBottom = true,
     this.icon,
     required this.title,
+    this.data, this.addCart, this.removeCart,
   });
 
   final double h;
@@ -19,7 +21,9 @@ class CustomProductCart extends StatefulWidget {
   final bool? addBottom;
   final IconData? icon;
   final String title;
-
+  final ProductModel? data;
+  final void Function()? addCart;
+  final void Function()? removeCart;
   @override
   State<CustomProductCart> createState() => _CustomProductCartState();
 }
@@ -37,8 +41,8 @@ class _CustomProductCartState extends State<CustomProductCart> {
           Padding(
             padding: EdgeInsets.only(bottom: widget.h * 0.01),
             child: Container(
-              height:orientation? widget.h * 0.14:widget.h*0.16,
-              width:orientation? double.infinity:widget. w*2,
+              height: orientation ? widget.h * 0.14 : widget.h * 0.16,
+              width: orientation ? double.infinity : widget.w * 2,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -64,7 +68,7 @@ class _CustomProductCartState extends State<CustomProductCart> {
                       child: Image.asset("assets/image/Fruits.png"),
                     ),
                   ),
-                  
+
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(top: widget.h * 0.02),
@@ -74,14 +78,12 @@ class _CustomProductCartState extends State<CustomProductCart> {
                           Row(
                             children: [
                               Container(
-                                child: Row(
-                                  children: [
-                                    CustomText(
-                                      fontSize:orientation? widget.h * 0.02 :widget. h*0.03,
-                                      color: Colors.black,
-                                      title: "Product name",
-                                    ),
-                                  ],
+                                child: CustomText(
+                                  fontSize: orientation
+                                      ? widget.h * 0.02
+                                      : widget.h * 0.03,
+                                  color: Colors.black,
+                                  title: "${widget.data!.nameEn}",
                                 ),
                               ),
                             ],
@@ -90,16 +92,20 @@ class _CustomProductCartState extends State<CustomProductCart> {
                           Row(
                             children: [
                               CustomText(
-                                fontSize:orientation? widget.h * 0.017:widget.h*0.02,
+                                fontSize: orientation
+                                    ? widget.h * 0.017
+                                    : widget.h * 0.02,
                                 color: ColorApp.gray,
-                                title: " 12.00KD",
+                                title: " ${widget.data!.price.toDouble()}KD",
                               ),
                             ],
                           ),
                           SizedBox(height: widget.h * 0.01),
                           widget.title.isEmpty
                               ? Container(
-                                  height:orientation? widget.h * 0.03:widget.h*0.045,
+                                  height: orientation
+                                      ? widget.h * 0.03
+                                      : widget.h * 0.045,
                                   width: widget.w * 0.3,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
@@ -131,18 +137,22 @@ class _CustomProductCartState extends State<CustomProductCart> {
                   ),
                   widget.add == false
                       ? Column(
-                        
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
-                                left:widget.addBottom==true?0 :widget.h * 0.02,
-                                 bottom: widget.h * 0.03,
-                                right:orientation? widget.h * 0.09:widget.h*0.0,
+                                left: widget.addBottom == true
+                                    ? 0
+                                    : widget.h * 0.02,
+                                bottom: widget.h * 0.03,
+                                right: orientation
+                                    ? widget.h * 0.09
+                                    : widget.h * 0.0,
                                 top: widget.h * 0.02,
                               ),
                               child: Container(
-                                decoration:widget.addBottom==true? BoxDecoration(
-                                ):BoxDecoration(
+                                decoration: widget.addBottom == true
+                                    ? BoxDecoration()
+                                    : BoxDecoration(
                                         border: Border.all(
                                           color: ColorApp.openGray,
                                         ),
@@ -150,22 +160,32 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                           150,
                                         ),
                                       ),
-                                child: Icon(widget.icon, size:orientation? widget.h * 0.03:widget.h*0.04),
+                                child: GestureDetector(
+                                  onTap: widget.removeCart,
+                                  child: Icon(
+                                    widget.icon,
+                                    size: orientation
+                                         ?widget.h * 0.03
+                                        : widget.h * 0.04
+                                  ),
+                                ),
                               ),
                             ),
                             widget.addBottom == true
                                 ? Expanded(
-                                  child: Padding(
+                                    child: Padding(
                                       padding: EdgeInsets.only(
                                         right: widget.h * 0.01,
                                         bottom: widget.h * 0.025,
-                                        left:  widget.h * 0.01,
+                                        left: widget.h * 0.01,
                                       ),
                                       child: Container(
                                         height: widget.h * 0.035,
                                         width: widget.h * 0.133,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius: BorderRadius.circular(
+                                            15,
+                                          ),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -192,7 +212,12 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                                     counter++;
                                                   });
                                                 },
-                                                child: Icon(Icons.add,size:orientation? widget.h*0.02:widget.h*0.04 ,),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  size: orientation
+                                                      ? widget.h * 0.02
+                                                      : widget.h * 0.04,
+                                                ),
                                               ),
                                               Text(
                                                 counter.toString(),
@@ -208,7 +233,8 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                                     }
                                                   });
                                                 },
-                                                child: Icon(Icons.remove,
+                                                child: Icon(
+                                                  Icons.remove,
                                                   size: orientation
                                                       ? widget.h * 0.02
                                                       : widget.h * 0.04,
@@ -219,14 +245,17 @@ class _CustomProductCartState extends State<CustomProductCart> {
                                         ),
                                       ),
                                     ),
-                                )
+                                  )
                                 : SizedBox(),
                           ],
                         )
-                      : Container(
-                          child: Image.asset(
-                            "assets/image/pasket.png",
-                            height: widget.h * 0.07,
+                      : GestureDetector(
+                          onTap:widget.addCart,
+                          child: Container(
+                            child: Image.asset(
+                              "assets/image/pasket.png",
+                              height: widget.h * 0.07,
+                            ),
                           ),
                         ),
                 ],

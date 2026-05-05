@@ -157,7 +157,6 @@ class _LogInBodyState extends State<LogInBody> {
                               );
                             } else {
                               saveToken(token: "${d.data!.token}");
-                              
                               context.go('/nav', extra: 0);
                             }
                           },

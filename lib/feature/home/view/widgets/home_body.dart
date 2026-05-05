@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:fruits_app/core/const/color_app.dart';
 
@@ -8,6 +9,9 @@ import 'package:fruits_app/feature/home/view/widgets/custom_list_view_seller.dar
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_dialog.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_slider.dart';
+import 'package:fruits_app/feature/home/view_model/sellers/cubit/get_seller_cubit.dart';
+import 'package:shimmer/shimmer.dart';
+
 
 class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
@@ -17,10 +21,11 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
+
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> items = [
-      {"image": "assets/image/restorant.png","title":""},
+      {"image": "assets/image/restorant.png", "title": ""},
       {"image": "assets/image/cafe.png", "title": ""},
       {"image": "assets/image/clinec.png", "title": ""},
       {"image": "assets/image/farm.png", "title": ""},
@@ -28,14 +33,16 @@ class _HomeBodyState extends State<HomeBody> {
     PageController _pageController = PageController();
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final orientation = MediaQuery.of(context).orientation ==Orientation.portrait;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Container(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: h * 0.02),
         child: Column(
           children: [
             CustomAppBar(
-              icon1: Icons.search,icon2: Icons.tune,
+              icon1: Icons.search,
+              icon2: Icons.tune,
               title: "Fruit Market",
               onTap2: () {
                 showDialog(
@@ -49,7 +56,7 @@ class _HomeBodyState extends State<HomeBody> {
             SizedBox(height: h * 0.02),
             CustomSlider(h: h, pageController: _pageController),
             SizedBox(height: h * 0.02),
-            CustomListCategory(h: h, items: items,orientation: orientation,),
+            CustomListCategory(h: h, items: items, orientation: orientation),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,8 +73,60 @@ class _HomeBodyState extends State<HomeBody> {
                 ),
               ],
             ),
-            Expanded(
-              child: CustomListViewSeller(h: h, w: w,itemCount: 3,orientation:orientation ,),
+            BlocBuilder<GetSellerCubit, GetSellerState>(
+              builder: (context, state) {
+                if (state is GetSellerLoading) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: 3,
+                      itemBuilder: (context, count) {
+                        return Shimmer.fromColors(
+                          baseColor: Colors.white,
+                          highlightColor: Colors.black,
+                          enabled: true,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: h * 0.15,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.15),
+                                    blurRadius: 10,
+                                    spreadRadius: 0.1,
+                                    offset: Offset(0, 5),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+                if (state is GetSellerSuccess) {
+                  var data = state.data;
+                  return Expanded(
+                    child: CustomListViewSeller(
+                      data: data,
+                      h: h,
+                      w: w,
+                      itemCount: 3,
+                      orientation: orientation,
+                    ),
+                  );
+                }
+                if (state is GetSellerFailure) {
+                  return Container(
+                    child: Center(child: Text("${state.massage}")),
+                  );
+                }
+                return Container();
+              },
             ),
           ],
         ),

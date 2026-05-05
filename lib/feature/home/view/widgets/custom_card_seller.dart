@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/home/data/model/vendor_model.dart';
 
 class CustomCardSeller extends StatelessWidget {
-  const CustomCardSeller({
-    super.key,
-    required this.h,
-    required this.w,
-  });
+  const CustomCardSeller({super.key, required this.h, required this.w, required this.data});
 
   final double h;
   final double w;
+  final VendorModel data;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(bottom: h*0.01),
+      padding: EdgeInsets.only(bottom: h * 0.01),
       child: Container(
         height: h * 0.14,
         width: double.infinity,
@@ -34,7 +32,11 @@ class CustomCardSeller extends StatelessWidget {
         child: Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: h * 0.01, left: h * 0.01,bottom: h*0.01),
+              padding: EdgeInsets.only(
+                top: h * 0.01,
+                left: h * 0.01,
+                bottom: h * 0.01,
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(70),
                 child: Image.asset("assets/image/logo.png"),
@@ -42,7 +44,7 @@ class CustomCardSeller extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(top: h*0.02,left: w*0.02),
+                padding: EdgeInsets.only(top: h * 0.02, left: w * 0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,7 +56,7 @@ class CustomCardSeller extends StatelessWidget {
                               CustomText(
                                 fontSize: h * 0.02,
                                 color: Colors.black,
-                                title: "Seller name",
+                                title: "${data.nameEn}",
                               ),
                               SizedBox(width: h * 0.01),
                               SvgPicture.asset("assets/image/mark.svg"),
@@ -82,10 +84,10 @@ class CustomCardSeller extends StatelessWidget {
                         SizedBox(width: w * 0.01),
                         CustomText(
                           fontSize: h * 0.013,
-                          color: ColorApp.green,
-                          title: "open",
+                          color:data.isOpened=="Y"? ColorApp.green:Colors.red,
+                          title:data.isOpened=="Y"? "Open":"Close",
                         ),
-                        SizedBox(width: w*0.05,),
+                        SizedBox(width: w * 0.05),
                         SvgPicture.asset("assets/image/point.svg"),
                         SizedBox(width: w * 0.01),
                         CustomText(
@@ -101,13 +103,13 @@ class CustomCardSeller extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:  EdgeInsets.only(left:w*0.05,top: h*0.026 ),
+              padding: EdgeInsets.only(left: w * 0.05, top: h * 0.026),
               child: Column(
                 children: [
                   CustomText(
                     fontSize: h * 0.015,
                     color: ColorApp.gray,
-                    title: "4.9",
+                    title: "${data.rate}",
                   ),
                   SizedBox(height: h * 0.05),
                   Row(

@@ -1,13 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/home/data/model/vendor_model.dart';
 
 class CustomDetailsSellerCart extends StatelessWidget {
-  const CustomDetailsSellerCart({super.key, required this.h, required this.w,  this.orientation=false});
+  const CustomDetailsSellerCart({
+    Key? key,
+    required this.h,
+    required this.w,
+    this.orientation = false,
+    required this.data,
+  }) : super(key: key);
   final double h;
   final double w;
   final bool orientation;
+  final VendorModel data;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +27,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: h * 0.01),
             child: Container(
-              height:orientation? h * 0.14:h*0.2,
+              height: orientation ? h * 0.14 : h * 0.2,
               width: double.infinity,
               decoration: BoxDecoration(
                 boxShadow: [
@@ -56,9 +66,9 @@ class CustomDetailsSellerCart extends StatelessWidget {
                               child: Row(
                                 children: [
                                   CustomText(
-                                    fontSize:orientation? h * 0.02:h*0.03,
+                                    fontSize: orientation ? h * 0.02 : h * 0.03,
                                     color: Colors.black,
-                                    title: "Seller name",
+                                    title: "${data.nameEn}",
                                   ),
                                   SizedBox(width: w * 0.3),
                                   SvgPicture.asset(
@@ -70,7 +80,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                             ),
                           ],
                         ),
-                      
+
                         Row(
                           children: [
                             CustomText(
@@ -80,7 +90,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                             ),
                           ],
                         ),
-                        
+
                         Row(
                           children: [
                             SvgPicture.asset("assets/image/point.svg"),
@@ -88,7 +98,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                             CustomText(
                               fontSize: orientation ? h * 0.02 : h * 0.022,
                               color: ColorApp.green,
-                              title: "open",
+                              title:data.isOpened=="Y"? "open":"Close",
                             ),
                             SizedBox(width: w * 0.05),
                             SvgPicture.asset("assets/image/point.svg"),
@@ -96,7 +106,7 @@ class CustomDetailsSellerCart extends StatelessWidget {
                             CustomText(
                               fontSize: orientation ? h * 0.02 : h * 0.022,
                               color: ColorApp.gray,
-                              title: "4,5",
+                              title: "${data.rate}",
                               fontFamily: false,
                             ),
                           ],

@@ -10,7 +10,8 @@ import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/core/widget/custom_text_form_field.dart';
 import 'package:fruits_app/feature/profile/view_model/profile/cubit/get_profile_cubit.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer/shimmer.dart';
+
 
 class ProfileBody extends StatefulWidget {
   const ProfileBody({super.key});
@@ -57,12 +58,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                     BlocBuilder<GetProfileCubit, GetProfileState>(
                       builder: (context, state) {
                         if (state is GetProfileLoading) {
-                          return Skeletonizer(
-                            effect: ShimmerEffect(
-                              baseColor: Colors.grey.shade300, // اللون الأساسي
-                              highlightColor:
-                                  Colors.grey.shade100, // لون اللمعة
-                            ),
+                          return Shimmer.fromColors(
+                            baseColor: Colors.white,
+                            highlightColor: Colors.black,
                             enabled: true,
                             child: Container(
                               height: h * 0.1,
@@ -131,11 +129,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                   if (state is GetProfileLoading) {
                     return Column(
                       children: [
-                        Skeletonizer(
-                          effect: ShimmerEffect(
-                            baseColor: Colors.grey.shade300, // اللون الأساسي
-                            highlightColor: Colors.grey.shade100, // لون اللمعة
-                          ),
+                        Shimmer.fromColors(
+                          baseColor: Colors.white,
+                          highlightColor: Colors.black,
                           enabled: true,
                           child: CustomTextFormField(
                             fontSize: h * 0.02,
@@ -146,11 +142,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                           ),
                         ),
                         SizedBox(height: h * 0.01),
-                        Skeletonizer(
-                          effect: ShimmerEffect(
-                            baseColor: Colors.grey.shade300, // اللون الأساسي
-                            highlightColor: Colors.grey.shade100, // لون اللمعة
-                          ),
+                        Shimmer.fromColors(
+                          baseColor: Colors.white,
+                          highlightColor: Colors.black,
                           enabled: true,
                           child: CustomTextFormField(
                             fontSize: h * 0.02,
@@ -161,11 +155,9 @@ class _ProfileBodyState extends State<ProfileBody> {
                           ),
                         ),
                         SizedBox(height: h * 0.01),
-                        Skeletonizer(
-                          effect: ShimmerEffect(
-                            baseColor: Colors.grey.shade300, // اللون الأساسي
-                            highlightColor: Colors.grey.shade100, // لون اللمعة
-                          ),
+                        Shimmer.fromColors(
+                          baseColor: Colors.white,
+                          highlightColor: Colors.black,
                           enabled: true,
                           child: CustomTextFormField(
                             fontSize: h * 0.02,
