@@ -24,7 +24,7 @@ class CheckOutSuccess extends StatelessWidget {
             centerTitle: true,
             backIcon: true,
             onTap: () {
-              context.go('/chickOut');
+              context.push('/nav',extra: 2);
             },
           ),
 
@@ -48,7 +48,7 @@ class CheckOutSuccess extends StatelessWidget {
                   SizedBox(height: h * 0.06),
                   CustomBottom(
                     onTap: () {
-                      context.go('/chickOut');
+                      context.push('/chickOut');
                     },
                     width: h * 0.36,
                     title: "continue_shopping_button".tr(),
@@ -60,7 +60,7 @@ class CheckOutSuccess extends StatelessWidget {
                   SizedBox(height: h * 0.02),
                   CustomBottom(
                     onTap: () {
-                      context.go('/chickOut');
+                      context.push('/chickOut');
                     },
                     width: h * 0.36,
                     title: "track_order_button".tr(),

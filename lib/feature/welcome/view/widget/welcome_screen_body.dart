@@ -26,7 +26,7 @@ class WelcomeScreenBody extends StatelessWidget {
             SizedBox(height: h * 0.03),
             CustomBottom(
               onTap: () {
-                context.go('/logIn');
+                context.push('/logIn');
               },
               icon: Icons.phone,
               width: h * 0.4,
@@ -60,7 +60,7 @@ class WelcomeScreenBody extends StatelessWidget {
             CustomLinkPage(
               height: h * 0.02,
               onTap: () {
-                context.go('/logIn');
+                context.push('/logIn');
               },
               title: 'alreadyMember '.tr(),
               link: 'signIn'.tr(),

@@ -109,52 +109,12 @@ class _LogInBodyState extends State<LogInBody> {
                 SizedBox(height: h * 0.03),
                 BlocConsumer<SignInCubit, SignInState>(
                   listener: (context, state) {
-                    if (state is SignInFailure) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text("Error"),
-                          icon: Icon(Icons.error),
-                          content: Container(
-                            height: h * 0.05,
-                            width: h * 0.05,
-                            child: Column(
-                              children: [
-                                Text(
-                                  state.massage,
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    }
                     if (state is SignInSuccess) {
                       var d = state.data;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           onVisible: () {
                             if (d.status == false) {
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text("Error"),
-                                  icon: Icon(Icons.error),
-                                  content: Container(
-                                    height: h * 0.05,
-                                    width: h * 0.05,
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          d.message.toString(),
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
                             } else {
                               saveToken(token: "${d.data!.token}");
                               context.go('/nav', extra: 0);

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
+import 'package:fruits_app/feature/basket/view/widgets/basket_body.dart';
 
 class CustomOrderDetails extends StatelessWidget {
   const CustomOrderDetails({
     super.key,
-    required this.h,
+    required this.h, required this.data,
   });
-
+  final CheckOut data;
   final double h;
 
   @override
@@ -37,7 +38,7 @@ class CustomOrderDetails extends StatelessWidget {
               CustomText(
                 fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
-                title: "4 Items in cart",
+                title: "${data.item} Items in cart",
               ),
             ],
           ),
@@ -56,7 +57,7 @@ class CustomOrderDetails extends StatelessWidget {
               CustomText(
                 fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
-                title: "36.00 KD",
+                title: "${data.total} KD",
               ),
             ],
           ),
@@ -74,7 +75,7 @@ class CustomOrderDetails extends StatelessWidget {
               CustomText(
                 fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
-                title: "1.50 KD",
+                title: "${data.shipping} KD",
               ),
             ],
           ),
@@ -92,7 +93,7 @@ class CustomOrderDetails extends StatelessWidget {
               CustomText(
                 fontSize: orientation ? h * 0.015 : h * 0.025,
                 color: ColorApp.green,
-                title: "37.50 KD",
+                title: "${data.finalTotal} KD",
               ),
             ],
           ),

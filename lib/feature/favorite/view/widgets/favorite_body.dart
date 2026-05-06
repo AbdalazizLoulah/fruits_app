@@ -52,21 +52,26 @@ class _FavoriteBodyState extends State<FavoriteBody> {
                               ),
                             )
                           : orientation == Orientation.portrait
-                          ? Expanded(
+                          ? Container(
+                            height: h * 0.8,
                               child: ListView.builder(
                                 itemCount: data.length,
                                 itemBuilder: (context, count) {
-                                  return CustomFavoriteCard(
-                                    onTap: () {
-                                      context.go("/product",extra: data[count]);
-                                    },
-                                    h: h,
-                                    data: data[count].product,
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomFavoriteCard(
+                                      onTap: () {
+                                        context.push("/product",extra: data[count]);
+                                      },
+                                      h: h,
+                                      data: data[count].product,
+                                    ),
                                   );
                                 },
                               ),
                             )
-                          : Expanded(
+                          : Container(
+                            height: h*0.8,
                               child: GridView.builder(
                                 padding: const EdgeInsets.all(12),
                                 gridDelegate:
@@ -80,7 +85,7 @@ class _FavoriteBodyState extends State<FavoriteBody> {
                                 itemBuilder: (context, index) {
                                   return CustomFavoriteCard(
                                     onTap: () {
-                                      context.go(
+                                      context.push(
                                         "/product",
                                         extra: data[index],
                                       );

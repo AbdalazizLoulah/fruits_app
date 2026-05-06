@@ -27,19 +27,19 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
     context.read<GetUserFavoriteCubit>().getUserFavorite();
     super.initState();
   }
-
   bool showWeight = false;
   bool showAddons = false;
   bool? isFavorite;
   @override
   Widget build(BuildContext context) {
+    bool isFav = false;
     var h = MediaQuery.of(context).size.height;
     final orientation =
         MediaQuery.of(context).orientation == Orientation.portrait;
     return SafeArea(
       child: SingleChildScrollView(
         child: Container(
-          child: BlocListener<AddDeleteFavoriteCubit, AddDeleteFavoriteState>(
+          child: BlocConsumer<AddDeleteFavoriteCubit, AddDeleteFavoriteState>(
             listener: (context, state) {
               if (state is AddDeleteFavoriteSuccess) {
                 var data = state.data;
@@ -57,118 +57,127 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                 context.read<GetUserFavoriteCubit>().getUserFavorite();
               }
             },
-
-            child: Column(
-              children: [
-                BlocBuilder<GetUserFavoriteCubit, GetUserFavoriteState>(
-                  builder: (context, state) {
-                    bool isFav = false;
-                    if (state is GetUserFavoriteSuccess) {
-                      isFav = state.data.data.any(
-                        (item) => item.product.id == widget.data.id,
+            builder: (context, state) {
+              if (state is AddDeleteFavoriteLoading) {
+                return Container(
+                  height: h,
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+              return Column(
+                children: [
+                  BlocBuilder<GetUserFavoriteCubit, GetUserFavoriteState>(
+                    builder: (context, state) {
+                      
+                      if (state is GetUserFavoriteSuccess) {
+                        isFav = state.data.data.any(
+                          (item) => item.product.id == widget.data.id,
+                        );
+                      }
+                      return CustomAppBar(
+                        onTap: () {
+                          context.go('/nav', extra: 0);
+                        },
+                        title: "${widget.data.nameEn}",
+                        centerTitle: true,
+                        addIcons: false,
+                        onTap1: () {
+                          context
+                              .read<AddDeleteFavoriteCubit>()
+                              .addDeleteFavorite(id: widget.data.id);
+                        },
+                        icon1: isFav == true
+                            ? Icons.favorite_outlined
+                            : Icons.favorite_border,
+                        icon2: Icons.ios_share,
+                        backIcon: true,
                       );
-                    }
-                    return CustomAppBar(
-                      onTap: () {
-                        context.go('/nav', extra: 0);
-                      },
-                      title: "${widget.data.nameEn}",
-                      centerTitle: true,
-                      addIcons: false,
-                      onTap1: () {
-                        context
-                            .read<AddDeleteFavoriteCubit>()
-                            .addDeleteFavorite(id: widget.data.id);
-                        context.read<AddDeleteFavoriteCubit>().reloade();
-                      },
-                      icon1: isFav == true
-                          ? Icons.favorite_outlined
-                          : Icons.favorite_border,
-                      icon2: Icons.ios_share,
-                      backIcon: true,
-                    );
-                  },
-                ),
-                SizedBox(height: h * 0.01),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: h * 0.02),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomPosterProduct(h: h, discound: widget.data.discount),
-                      SizedBox(height: h * 0.014),
-                      CustomDetailsProduct(
-                        h: h,
-                        orientation: orientation,
-                        data: widget.data,
-                      ),
-                      SizedBox(height: h * 0.014),
-                      Text("${widget.data.detailsEn}"),
-                      SizedBox(height: h * 0.014),
-                      Text("${widget.data.unitEn}"),
-                      SizedBox(height: h * 0.016),
-                      CustomSelectWeight(
-                        orientation: orientation,
-                        itemCount: 3,
-                        show: showWeight,
-                        h: h,
-                        title: "title".tr(),
-                        icon: Icons.keyboard_arrow_up,
-                        onTap: () {
-                          setState(() {
-                            showWeight = !showWeight;
-                          });
-                        },
-                      ),
-                      CustomSelectWeight(
-                        orientation: orientation,
-                        itemCount: 2,
-                        onTap: () {
-                          setState(() {
-                            showAddons = !showAddons;
-                          });
-                        },
-                        show: showAddons,
-                        h: h,
-                        title: "selectAddons".tr(),
-                        icon: Icons.keyboard_arrow_down,
-                      ),
-                      SizedBox(height: h * 0.016),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          CustomBottom(
-                            onTap: (){
-                              var box = Hive.box<ProductModel>('products');
-                              bool exists = box.values.any(
-                                (e) => e.id == widget.data.id,
-                              );
-                              if (!exists) {
-                                box.add(widget.data);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(" Add To Cart"),
-                                    backgroundColor: Colors.green,
-                                    duration: Duration(seconds: 2),
-                                  ),
-                                );
-                              }
-                            },
-                            width: orientation ? h * 0.15 : h * 0.3,
-                            title: "addToCart".tr(),
-                            heightBottom: orientation ? h * 0.04 : h * 0.07,
-                            heightText: orientation ? h * 0.015 : h * 0.025,
-                            colorBottom: ColorApp.green,
-                            colorText: Colors.white,
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: h * 0.05),
-                    ],
+                    },
                   ),
-                ),
-              ],
-            ),
+                  SizedBox(height: h * 0.01),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: h * 0.02),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomPosterProduct(
+                          h: h,
+                          discound: widget.data.discount,
+                        ),
+                        SizedBox(height: h * 0.014),
+                        CustomDetailsProduct(
+                          h: h,
+                          orientation: orientation,
+                          data: widget.data,
+                        ),
+                        SizedBox(height: h * 0.014),
+                        Text("${widget.data.detailsEn}"),
+                        SizedBox(height: h * 0.014),
+                        Text("${widget.data.unitEn}"),
+                        SizedBox(height: h * 0.016),
+                        CustomSelectWeight(
+                          orientation: orientation,
+                          itemCount: 3,
+                          show: showWeight,
+                          h: h,
+                          title: "title".tr(),
+                          icon: Icons.keyboard_arrow_up,
+                          onTap: () {
+                            setState(() {
+                              showWeight = !showWeight;
+                            });
+                          },
+                        ),
+                        CustomSelectWeight(
+                          orientation: orientation,
+                          itemCount: 2,
+                          onTap: () {
+                            setState(() {
+                              showAddons = !showAddons;
+                            });
+                          },
+                          show: showAddons,
+                          h: h,
+                          title: "selectAddons".tr(),
+                          icon: Icons.keyboard_arrow_down,
+                        ),
+                        SizedBox(height: h * 0.016),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            CustomBottom(
+                              onTap: () {
+                                var box = Hive.box<ProductModel>('products');
+                                bool exists = box.values.any(
+                                  (e) => e.id == widget.data.id,
+                                );
+                                if (!exists) {
+                                  box.add(widget.data);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(" Add To Cart"),
+                                      backgroundColor: Colors.green,
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                }
+                              },
+                              width: orientation ? h * 0.15 : h * 0.3,
+                              title: "addToCart".tr(),
+                              heightBottom: orientation ? h * 0.04 : h * 0.07,
+                              heightText: orientation ? h * 0.015 : h * 0.025,
+                              colorBottom: ColorApp.green,
+                              colorText: Colors.white,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: h * 0.05),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

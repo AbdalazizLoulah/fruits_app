@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
@@ -18,6 +21,21 @@ class MoreBody extends StatefulWidget {
 }
 
 class _MoreBodyState extends State<MoreBody> {
+  String? token;
+  final storage = FlutterSecureStorage();
+  @override
+  void initState() {
+    super.initState();
+    getToken();
+  }
+
+  Future getToken() async {
+    token = await storage.read(key: "token");
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -43,11 +61,18 @@ class _MoreBodyState extends State<MoreBody> {
                         border: Border.all(color: ColorApp.gray),
                       ),
                       child: Center(
-                        child: Icon(
-                          Icons.person_2_outlined,
-                          size: h * 0.06,
-                          color: ColorApp.gray,
-                        ),
+                        child: token != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(
+                                  h * 0.05,
+                                ),
+                                child: Image.asset("assets/image/animal.png"),
+                              )
+                            : Icon(
+                                Icons.person_2_outlined,
+                                size: h * 0.06,
+                                color: ColorApp.gray,
+                              ),
                       ),
                     ),
                     SizedBox(height: h * 0.01),
@@ -59,8 +84,15 @@ class _MoreBodyState extends State<MoreBody> {
                     ),
                     SizedBox(height: h * 0.02),
                     CustomBottom(
+                      onTap: token != null
+                          ? () async {
+                            await storage.delete(key: "token");
+                            context.go("/logIn");
+                              
+                            }
+                          : () {},
                       width: w * 0.8,
-                      title: "LogIn",
+                      title: token == null ? "LogIn" : "log Out",
                       heightBottom: h * 0.056,
                       heightText: h * 0.02,
                       colorBottom: ColorApp.green,
@@ -70,7 +102,7 @@ class _MoreBodyState extends State<MoreBody> {
                     CustomCategoryProfile(
                       orientation: orientation,
                       onTap: () {
-                        context.go('/profile');
+                        context.push('/profile');
                       },
                       h: h,
                       w: w,
@@ -118,7 +150,7 @@ class _MoreBodyState extends State<MoreBody> {
                     CustomCategoryProfile(
                       orientation: orientation,
                       onTap: () {
-                        context.go('/contact');
+                        context.push('/contact');
                       },
                       h: h,
                       w: w,
@@ -129,7 +161,7 @@ class _MoreBodyState extends State<MoreBody> {
                     CustomCategoryProfile(
                       orientation: orientation,
                       onTap: () {
-                        context.go('/team');
+                        context.push('/team');
                       },
                       h: h,
                       w: w,
@@ -139,7 +171,7 @@ class _MoreBodyState extends State<MoreBody> {
                     SizedBox(height: h * 0.04),
                     CustomCategoryProfile(
                       onTap: () {
-                        context.go("/aboutUs");
+                        context.push("/aboutUs");
                       },
                       orientation: orientation,
                       h: h,

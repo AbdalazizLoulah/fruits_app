@@ -28,7 +28,7 @@ class CustomListViewSeller extends StatelessWidget {
               itemBuilder: (context, count) {
                 return GestureDetector(
                   onTap: () {
-                    context.go('/detailsSeller',
+                    context.push('/detailsSeller',
                       extra: data.data.vendors[count],
                     );
                   },
@@ -48,7 +48,7 @@ class CustomListViewSeller extends StatelessWidget {
                 itemCount: data.data.vendors.length,
                 itemBuilder: (context, count) => GestureDetector(
                   onTap: () {
-                    context.go('/detailsSeller',extra: data.data.vendors[count].id);
+                    context.push('/detailsSeller',extra: data.data.vendors[count].id);
                   },
                   child: CustomCardSeller(h: h, w: w,
                     data: data.data.vendors[count],

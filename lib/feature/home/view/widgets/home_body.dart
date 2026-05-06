@@ -5,6 +5,7 @@ import 'package:fruits_app/core/const/color_app.dart';
 
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_list_category.dart';
+import 'package:fruits_app/core/widget/custom_list_view_loading.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_list_view_seller.dart';
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_dialog.dart';
@@ -77,35 +78,7 @@ class _HomeBodyState extends State<HomeBody> {
               builder: (context, state) {
                 if (state is GetSellerLoading) {
                   return Expanded(
-                    child: ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (context, count) {
-                        return Shimmer.fromColors(
-                          baseColor: Colors.white,
-                          highlightColor: Colors.black,
-                          enabled: true,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: h * 0.15,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.15),
-                                    blurRadius: 10,
-                                    spreadRadius: 0.1,
-                                    offset: Offset(0, 5),
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                    child: CustomListViewLoading(h: h)
                   );
                 }
                 if (state is GetSellerSuccess) {

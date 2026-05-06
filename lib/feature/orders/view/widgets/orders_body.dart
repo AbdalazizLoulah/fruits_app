@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/feature/orders/view/widgets/custom_card_orders.dart';
@@ -15,7 +16,10 @@ class OrdersBody extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          CustomAppBar(centerTitle: true, title: "My Orders"),
+          CustomAppBar(
+            centerTitle: true, title: "My Orders",onTap: () {
+            
+          },),
           orientation
               ? Expanded(
                   child: ListView.builder(
@@ -24,7 +28,7 @@ class OrdersBody extends StatelessWidget {
                     itemBuilder: (context, count) {
                       return GestureDetector(
                         onTap: () {
-                          context.go('/orderTracking');
+                          context.push('/orderTracking');
                         },
                         child: CustomCardOrders(h: h, w: w),
                       );
@@ -44,7 +48,7 @@ class OrdersBody extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                           onTap: () {
-                          context.go('/orderTracking');
+                          context.push('/orderTracking');
                         },
                         child: CustomCardOrders(h: h, w: w,orientation: true,));
                     },

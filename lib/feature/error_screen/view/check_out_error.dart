@@ -26,7 +26,7 @@ class CheckOutError extends StatelessWidget {
               centerTitle: true,
               backIcon: true,
               onTap: () {
-              context.go('/chickOut');
+              context.go('/nav',extra: 2);
               },
             ),
             SizedBox(height: h * 0.02),

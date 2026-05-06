@@ -85,7 +85,6 @@ class _DetailsSellerBodyState extends State<DetailsSellerBody> {
                     }
                     if (state is GetProductSellsSuccess) {
                       var data = state.data.data;
-
                       return SizedBox(
                         height: orientation ? h * 0.5 : h * 0.25,
                         child: orientation
@@ -114,9 +113,7 @@ class _DetailsSellerBodyState extends State<DetailsSellerBody> {
                                             context,
                                           ).showSnackBar(
                                             SnackBar(
-                                              content: Text(
-                                                " Add To Cart",
-                                              ),
+                                              content: Text(" Add To Cart"),
                                               backgroundColor: Colors.green,
                                               duration: Duration(seconds: 2),
                                             ),
@@ -145,7 +142,7 @@ class _DetailsSellerBodyState extends State<DetailsSellerBody> {
                                   itemBuilder: (context, count) =>
                                       GestureDetector(
                                         onTap: () {
-                                          context.go(
+                                          context.push(
                                             '/product',
                                             extra: data[count],
                                           );

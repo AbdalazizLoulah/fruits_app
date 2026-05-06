@@ -6,12 +6,10 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
-
   await Hive.openBox<ProductModel>('products');
   // await Firebase.initializeApp();
   runApp(

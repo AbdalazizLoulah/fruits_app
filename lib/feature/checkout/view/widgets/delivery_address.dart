@@ -5,18 +5,23 @@ import 'package:fruits_app/feature/checkout/view/widgets/custom_card_address.dar
 import 'package:fruits_app/feature/checkout/view/widgets/custom_check_bottom.dart';
 
 class DeliveryAddress extends StatefulWidget {
-  const DeliveryAddress({super.key});
-
+  const DeliveryAddress({
+    super.key,
+    required this.address,
+    required this.onChanged,
+  });
+  final bool address;
+  final Function(bool now) onChanged;
   @override
   State<DeliveryAddress> createState() => _DeliveryAddressState();
 }
 
 class _DeliveryAddressState extends State<DeliveryAddress> {
-  
-  bool isSelect = false;
+
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation ==Orientation.portrait;
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     var h = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: h * 0.02),
@@ -41,11 +46,9 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           SizedBox(height: h * 0.02),
           CustomCardAddress(
             h: h,
-            isSelect: isSelect,
+            isSelect: widget.address,
             onTap: () {
-              setState(() {
-                isSelect = ! isSelect;
-              });
+              widget.onChanged(!widget.address );
             },
           ),
         ],

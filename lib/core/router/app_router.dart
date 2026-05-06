@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_app/core/service/api_service.dart';
 import 'package:fruits_app/feature/about_us/view/about_Screen.dart';
+import 'package:fruits_app/feature/basket/view/widgets/basket_body.dart';
 import 'package:fruits_app/feature/details_seller/data/models/product_model.dart';
 import 'package:fruits_app/feature/home/data/model/vendor_model.dart';
 import 'package:fruits_app/feature/product_details/view_model/get_product_sells/cubit/get_product_sells_cubit.dart';
@@ -79,7 +80,7 @@ class AppRouter {
         path: '/product',
         builder: (context, state) {
           final data = state.extra as ProductModel;
-          return ProductDetailsScreen(data: data,);
+          return ProductDetailsScreen(data: data);
         },
       ),
       GoRoute(
@@ -92,7 +93,13 @@ class AppRouter {
         path: '/orderTracking',
         builder: (context, state) => OrderTrackingScreen(),
       ),
-      GoRoute(path: '/chickOut', builder: (context, state) => CheckOutScreen()),
+      GoRoute(
+        path: '/chickOut',
+        builder: (context, state) {
+          final data = state.extra as CheckOut;
+          return CheckOutScreen(data: data,);
+        },
+      ),
       GoRoute(
         path: '/chickOutSuccess',
         builder: (context, state) => CheckOutSuccess(),

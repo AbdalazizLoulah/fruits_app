@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashScreenBody extends StatefulWidget {
@@ -11,10 +12,24 @@ class SplashScreenBody extends StatefulWidget {
 class _SplashScreenBodyState extends State<SplashScreenBody> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 3), () {
-      context.go('/onboard');
-    });
     super.initState();
+    _navigate();
+  }
+void _navigate() async {
+    print("start delay");
+
+    await Future.delayed(const Duration(seconds: 3));
+
+    print("end delay");
+
+    final storage = const FlutterSecureStorage();
+    String? token = await storage.read(key: "token");
+
+    print("token = $token");
+
+    if (!mounted) return;
+
+    context.go((token == null || token.isEmpty) ? '/onboard' : '/nav');
   }
 
   @override

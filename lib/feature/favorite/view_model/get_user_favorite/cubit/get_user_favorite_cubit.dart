@@ -18,10 +18,10 @@ class GetUserFavoriteCubit extends Cubit<GetUserFavoriteState> {
     emit(GetUserFavoriteLoading());
     try {
       var res = await apiService.get(endPoint: "user_favorite/t/ar");
-      log("${res}");
+      
       var data = FavoriteResponse.fromJson(res);
 
-log("${data.data}");
+
       emit(GetUserFavoriteSuccess(data: data));
       return right(data);
     } catch (e) {

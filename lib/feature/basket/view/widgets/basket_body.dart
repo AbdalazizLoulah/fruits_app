@@ -56,7 +56,6 @@ class _BasketBodyState extends State<BasketBody> {
                 );
 
                 if (products.isEmpty) {
-                
                   return Center(child: Text("The Basket is Empty"));
                 }
                 return isPortrait
@@ -222,14 +221,14 @@ class _BasketBodyState extends State<BasketBody> {
                   CustomText(
                     fontSize: orientation ? h * 0.014 : h * 0.025,
                     color: ColorApp.green,
-                    title: products.isEmpty ? "00.00" : "37.50 KD",
+                    title: products.isEmpty ? "00.00" : "${finalTotal} KD",
                   ),
                 ],
               ),
 
               CustomBottom(
                 onTap: () {
-                  context.go('/chickOut');
+                  context.push('/chickOut',extra: CheckOut(total: total, shipping: shipping, finalTotal: finalTotal, item: products.length));
                 },
                 width: orientation ? h * 0.22 : h * 0.35,
                 title: "Proceed To Checkout",
@@ -244,4 +243,17 @@ class _BasketBodyState extends State<BasketBody> {
       ),
     );
   }
+}
+
+class CheckOut {
+  final double total;
+  final double shipping;
+  final double finalTotal;
+  final int item;
+
+  CheckOut({
+    required this.total,
+    required this.shipping,
+    required this.finalTotal, required this.item,
+  });
 }
