@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -116,6 +115,7 @@ class _LogInBodyState extends State<LogInBody> {
                           onVisible: () {
                             if (d.status == false) {
                             } else {
+                              
                               saveToken(token: "${d.data!.token}");
                               context.go('/nav', extra: 0);
                             }

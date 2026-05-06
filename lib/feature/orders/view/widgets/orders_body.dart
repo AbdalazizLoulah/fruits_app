@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/feature/orders/view/widgets/custom_card_orders.dart';

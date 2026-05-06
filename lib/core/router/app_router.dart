@@ -11,9 +11,8 @@ import 'package:fruits_app/feature/home/view_model/sellers/cubit/get_seller_cubi
 import 'package:fruits_app/feature/nav_bar/view/widgets/custom_bottom_nav.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:fruits_app/core/service/auth_phone.dart';
+
 import 'package:fruits_app/feature/Auth/forgetPassword/view/forget_password.dart';
-import 'package:fruits_app/feature/Auth/forgetPassword/view_model/auth_phone/cubit/auth_phone_cubit.dart';
 import 'package:fruits_app/feature/Auth/logIn/view/log_in_screen.dart';
 import 'package:fruits_app/feature/Auth/otp/view/otp_screen.dart';
 import 'package:fruits_app/feature/Auth/signUp/view/sign_in_screen.dart';
@@ -22,7 +21,6 @@ import 'package:fruits_app/feature/contact_us/view/contact_us_screen.dart';
 import 'package:fruits_app/feature/details_seller/view/details_seller_screen.dart';
 import 'package:fruits_app/feature/error_screen/view/check_out_error.dart';
 import 'package:fruits_app/feature/home/view/home_screen.dart';
-import 'package:fruits_app/feature/nav_bar/view/navigate_screen.dart';
 import 'package:fruits_app/feature/on_board.dart/view/on_board_screen.dart';
 import 'package:fruits_app/feature/order_tracking/view/order_tracking_screen.dart';
 import 'package:fruits_app/feature/product_details/view/product_details_screen.dart';

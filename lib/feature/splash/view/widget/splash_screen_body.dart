@@ -16,17 +16,10 @@ class _SplashScreenBodyState extends State<SplashScreenBody> {
     _navigate();
   }
 void _navigate() async {
-    print("start delay");
 
     await Future.delayed(const Duration(seconds: 3));
-
-    print("end delay");
-
     final storage = const FlutterSecureStorage();
     String? token = await storage.read(key: "token");
-
-    print("token = $token");
-
     if (!mounted) return;
 
     context.go((token == null || token.isEmpty) ? '/onboard' : '/nav');

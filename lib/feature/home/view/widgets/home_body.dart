@@ -11,7 +11,7 @@ import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_dialog.dart';
 import 'package:fruits_app/feature/home/view/widgets/custom_slider.dart';
 import 'package:fruits_app/feature/home/view_model/sellers/cubit/get_seller_cubit.dart';
-import 'package:shimmer/shimmer.dart';
+
 
 
 class HomeBody extends StatefulWidget {

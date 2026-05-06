@@ -1,4 +1,4 @@
-import 'package:fruits_app/feature/details_seller/data/models/product_model.dart';
+
 import 'package:fruits_app/feature/favorite/data/model/favorite_product_model.dart';
 
 class FavoriteItem {

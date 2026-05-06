@@ -27,6 +27,7 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
     context.read<GetUserFavoriteCubit>().getUserFavorite();
     super.initState();
   }
+
   bool showWeight = false;
   bool showAddons = false;
   bool? isFavorite;

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
 import 'package:fruits_app/core/widget/custom_circle.dart';

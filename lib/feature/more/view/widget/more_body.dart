@@ -1,13 +1,11 @@
-import 'dart:developer';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:fruits_app/core/const/color_app.dart';
 import 'package:fruits_app/core/widget/custom_app_bar.dart';
 import 'package:fruits_app/core/widget/custom_bottom.dart';
-import 'package:fruits_app/core/widget/custom_circle.dart';
+
 import 'package:fruits_app/core/widget/custom_text.dart';
 import 'package:fruits_app/feature/more/view/widget/custom_category_profile.dart';
 import 'package:fruits_app/feature/more/view/widget/custom_dialog_language.dart';

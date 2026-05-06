@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_app/core/const/color_app.dart';
+
 import 'package:fruits_app/core/widget/custom_indicator.dart';
 
 class CustomSlider extends StatelessWidget {
