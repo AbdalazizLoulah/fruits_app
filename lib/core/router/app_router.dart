@@ -6,6 +6,9 @@ import 'package:fruits_app/feature/about_us/view/about_Screen.dart';
 import 'package:fruits_app/feature/basket/view/widgets/basket_body.dart';
 import 'package:fruits_app/feature/details_seller/data/models/product_model.dart';
 import 'package:fruits_app/feature/home/data/model/vendor_model.dart';
+import 'package:fruits_app/feature/home/data/repo/home_repo_implementation.dart';
+import 'package:fruits_app/feature/product_details/data/repo/product_details_repo.dart';
+import 'package:fruits_app/feature/product_details/data/repo/product_details_repo_implementation.dart';
 import 'package:fruits_app/feature/product_details/view_model/get_product_sells/cubit/get_product_sells_cubit.dart';
 import 'package:fruits_app/feature/home/view_model/sellers/cubit/get_seller_cubit.dart';
 import 'package:fruits_app/feature/nav_bar/view/widgets/custom_bottom_nav.dart';
@@ -49,7 +52,9 @@ class AppRouter {
           final index = state.extra as int? ?? 0;
           return BlocProvider(
             create: (context) =>
-                GetSellerCubit(ApiService(dio: Dio()))..getSellers(),
+                GetSellerCubit(
+              HomeRepoImplementation(apiService: ApiService(dio: Dio())),
+            )..getSellers(),
             child: CustomBottomNav(currentIndex: index),
           );
         },
@@ -58,7 +63,9 @@ class AppRouter {
         path: '/home',
         builder: (context, state) => BlocProvider(
           create: (context) =>
-              GetSellerCubit(ApiService(dio: Dio()))..getSellers(),
+              GetSellerCubit(
+            HomeRepoImplementation(apiService: ApiService(dio: Dio())),
+          )..getSellers(),
           child: HomeScreen(),
         ),
       ),
@@ -68,7 +75,9 @@ class AppRouter {
           final index = state.extra as VendorModel;
           return BlocProvider(
             create: (context) =>
-                GetProductSellsCubit(ApiService(dio: Dio()))
+                GetProductSellsCubit(
+              ProductDetailsRepoImplementation(apiService: ApiService(dio: Dio())),
+            )
                   ..getProduct(id: index.id),
             child: DetailsSellerScreen(id: index),
           );

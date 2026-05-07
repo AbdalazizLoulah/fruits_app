@@ -47,9 +47,9 @@ class _ProductDetailsBodyState extends State<ProductDetailsBody> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: data.result
-                        ? Text('${data.errorMessage}')
-                        : Text("${data.errorMessage}"),
-                    backgroundColor: data.errorMessage == "تم الإضافة للمفضلة"
+                        ? Text('${data.message}')
+                        : Text("${data.message}"),
+                    backgroundColor: data.message == "تم الإضافة للمفضلة"
                         ? Colors.green
                         : Colors.red,
                     duration: Duration(seconds: 3),

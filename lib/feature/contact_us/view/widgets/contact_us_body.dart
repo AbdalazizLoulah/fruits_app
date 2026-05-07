@@ -163,7 +163,7 @@ class _ContactUsBodyState extends State<ContactUsBody> {
                         return CustomBottom(
                           onTap: () {
                             if (key.currentState!.validate()) {
-                              context.read<ContactUsCubit>().seendMassage(
+                              context.read<ContactUsCubit>().sendMassage(
                                 name: nameController.text,
                                 massage: messageController.text,
                                 mobile: mobileController.text,
